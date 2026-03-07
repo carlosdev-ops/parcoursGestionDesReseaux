@@ -927,6 +927,26 @@ function create_assign(int $courseid, int $sectionnum, array $def, bool $dry_run
 }
 
 function create_label(int $courseid, int $sectionnum, array $def, bool $dry_run): ?int {
+    global $DB;
+
+    // Idempotence : vérifier si un label de même nom existe déjà dans cette section
+    $section_rec = $DB->get_record('course_sections', ['course' => $courseid, 'section' => $sectionnum]);
+    if ($section_rec) {
+        $existing = $DB->get_records_sql(
+            "SELECT cm.id FROM {course_modules} cm
+               JOIN {modules} m ON m.id = cm.module
+               JOIN {label} l ON l.id = cm.instance
+              WHERE cm.course = :course AND cm.section = :section AND m.name = 'label'
+                AND " . $DB->sql_like('l.name', ':name'),
+            ['course' => $courseid, 'section' => $section_rec->id,
+             'name'   => $DB->sql_like_escape(mb_substr($def['name'], 0, 50)) . '%']
+        );
+        if (!empty($existing) && !isset($def['force'])) {
+            parcours_log("  Étiquette '{$def['name']}' existe déjà — ignorée.", 'warning');
+            return null;
+        }
+    }
+
     $moduleinfo = new stdClass();
     $moduleinfo->modulename   = 'label';
     $moduleinfo->module       = get_module_id('label');
