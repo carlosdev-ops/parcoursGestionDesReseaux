@@ -1,0 +1,126 @@
+// ============================================================
+// Cours 1 — Module 5 : Outils de diagnostic fondamentaux
+// Quiz formatif — 15 questions
+// ============================================================
+
+$CATEGORY: $course$/Cours 1 — Module 5 — Outils de diagnostic
+
+::OUTIL-01::[html]La commande "ping 8.8.8.8" retourne "Request timeout". Quelle est la conclusion MINIMALE que l'on peut tirer ? {
+    =Les paquets ICMP n'atteignent pas 8.8.8.8 ou les réponses ne reviennent pas — la connectivité vers cette destination est interrompue à ce stade
+    ~Le serveur DNS est en panne
+    ~La carte réseau locale est défectueuse
+    ~L'adresse IP 8.8.8.8 n'existe pas
+    ####"Request timeout" signifie que les paquets ICMP sont envoyés mais qu'aucune réponse n'est reçue. Causes possibles : problème de routage, pare-feu bloquant ICMP, hôte de destination éteint. Il ne faut pas conclure que la carte réseau est défectueuse sans d'abord tester un ping local.
+}
+
+::OUTIL-02::[html]Quelle commande Linux affiche la table de routage IP du système local ? {
+    =ip route show (ou route -n sur les anciens systèmes)
+    ~ping
+    ~traceroute
+    ~netstat -i
+    ####"ip route show" affiche la table de routage Linux (commande iproute2). Elle montre les réseaux connus, la passerelle par défaut et les interfaces associées. L'ancienne commande "route -n" fait la même chose mais est dépréciée sur les systèmes modernes.
+}
+
+::OUTIL-03::[html]Qu'affiche la commande "arp -a" sur un système Linux ou Windows ? {
+    =La table ARP locale — les associations entre adresses IP et adresses MAC connues
+    ~Les routes IP configurées sur le système
+    ~La liste des connexions réseau actives
+    ~La configuration des interfaces réseau
+    ####"arp -a" affiche la table ARP (Address Resolution Protocol) qui met en cache les associations IP→MAC pour les hôtes sur le réseau local. Ces entrées expirent après quelques minutes. Utile pour diagnostiquer les conflits d'adresses IP.
+}
+
+::OUTIL-04::[html]Un technicien exécute "traceroute 1.1.1.1" depuis un serveur Linux. Il observe que les sauts 3 et 4 affichent "* * *". Quelle est l'interprétation la plus probable ? {
+    =Les routeurs aux sauts 3 et 4 filtrent les paquets ICMP/UDP utilisés par traceroute — ils ne répondent pas, mais le trafic passe quand même
+    ~La connexion Internet est coupée à partir du saut 3
+    ~Le serveur 1.1.1.1 est inaccessible
+    ~Le protocole traceroute est bloqué sur le réseau local
+    ####"* * *" dans traceroute signifie qu'aucune réponse ICMP Time Exceeded n'a été reçue de ce routeur dans le délai imparti. Cela peut indiquer que le routeur filtre ICMP mais transfère quand même le trafic. Ce n'est pas nécessairement une panne si les sauts suivants répondent.
+}
+
+::OUTIL-05::[html]Quelle est la différence entre "ping -c 4 192.168.1.1" et "ping -c 4 -s 1400 192.168.1.1" ? {
+    =La deuxième commande envoie des paquets de 1400 octets au lieu du défaut de 56 octets (données ICMP)
+    ~La deuxième commande attend 1400 millisecondes entre chaque ping
+    ~La deuxième commande utilise le port 1400 au lieu d'ICMP
+    ~Il n'y a aucune différence dans le comportement réseau
+    ####L'option -s spécifie la taille du payload ICMP en octets. Utile pour tester la fragmentation (envoyer un paquet proche du MTU) ou diagnostiquer des problèmes liés à la taille des paquets. Un ping -s 1472 avec un MTU de 1500 octets est proche de la limite Ethernet.
+}
+
+::OUTIL-06::[html]Quelle commande nslookup ou dig permet de déterminer quel serveur de messagerie est responsable du domaine "exemple.ca" ? {
+    =nslookup -type=MX exemple.ca (ou : dig MX exemple.ca)
+    ~nslookup exemple.ca
+    ~ping exemple.ca
+    ~dig A exemple.ca
+    ####Pour interroger les enregistrements MX (Mail Exchanger), il faut spécifier le type de requête DNS. "nslookup -type=MX exemple.ca" ou "dig MX exemple.ca" retourne les serveurs de messagerie et leur priorité.
+}
+
+::OUTIL-07::[html]La commande "netstat -an" sur Linux/Windows affiche quelle information ? {
+    =Toutes les connexions réseau actives et les ports en écoute, avec adresses numériques (sans résolution de noms)
+    ~La table de routage IP
+    ~Les statistiques des interfaces réseau (paquets envoyés/reçus)
+    ~La table ARP
+    ####"netstat -an" (-a : toutes connexions, -n : numérique sans résolution DNS) liste les connexions TCP/UDP actives et les ports ouverts. Remplacé par "ss -an" sur les systèmes Linux modernes. Utile pour identifier quels services écoutent.
+}
+
+::OUTIL-08::[html]Wireshark est lancé sur un PC connecté à un switch. Par défaut, quelles trames Wireshark capture-t-il ? {
+    =Uniquement les trames destinées au PC local (et les broadcasts/multicasts)
+    ~Tout le trafic du réseau, incluant les trames des autres hôtes
+    ~Uniquement le trafic ICMP
+    ~Uniquement le trafic HTTP/HTTPS
+    ####Par défaut, une carte réseau en mode normal (non-promiscuous) ne capture que les trames qui lui sont destinées (adresse MAC du PC, broadcast, multicast). Pour capturer tout le trafic du segment, il faut activer le mode promiscuous ET être connecté à un port miroir (SPAN) du switch.
+}
+
+::OUTIL-09::[html]Quelle commande Linux affiche la configuration réseau de toutes les interfaces (adresse IP, masque, état up/down) sur un système moderne RHEL/Debian ? {
+    =ip addr show (ou ip a)
+    ~ifconfig
+    ~ipconfig (commande Windows)
+    ~route -n
+    ####"ip addr show" (abrégé "ip a") est la commande iproute2 moderne pour afficher la configuration des interfaces. "ifconfig" est dépréciée sur Linux mais reste disponible sur macOS. "ipconfig" est la commande Windows équivalente.
+}
+
+::OUTIL-10::[html]Un technicien veut identifier si le problème de connectivité se situe dans le réseau local ou au-delà. Quelle séquence de tests lui permet d'isoler le problème ? {
+    =1) ping 127.0.0.1 (loopback) → 2) ping adresse IP locale → 3) ping passerelle → 4) ping adresse externe
+    ~1) ping adresse externe → 2) ping passerelle → 3) ping IP locale → 4) ping 127.0.0.1
+    ~1) traceroute → 2) nslookup → 3) ping
+    ~1) ping passerelle → 2) ping externe → 3) ping loopback
+    ####La méthodologie "bottom-up" isole progressivement le problème : (1) ping 127.0.0.1 valide la pile TCP/IP locale, (2) ping sa propre IP valide la carte réseau, (3) ping la passerelle valide le LAN, (4) ping une IP externe valide le routage Internet.
+}
+
+::OUTIL-11::[html]Quelle option de la commande "ping" sous Linux limite le nombre de paquets ICMP envoyés à 5 ? {
+    =-c 5 (count)
+    ~-n 5
+    ~-t 5
+    ~-s 5
+    ####"ping -c 5 destination" envoie exactement 5 paquets ICMP puis s'arrête. Sur Windows, ping envoie 4 paquets par défaut. Sur Linux, sans -c, ping s'exécute indéfiniment jusqu'à Ctrl+C.
+}
+
+::OUTIL-12::[html]Que signifie le résultat "Destination Host Unreachable" lors d'un ping ? {
+    =Le routeur local ne trouve pas de route vers l'hôte destination et retourne un message ICMP d'erreur
+    ~L'hôte destination est éteint
+    ~La carte réseau du PC local est défectueuse
+    ~Le serveur DNS ne fonctionne pas
+    ####"Destination Host Unreachable" est un message ICMP Type 3 généré par un routeur (ou le PC lui-même) indiquant qu'aucune route n'est disponible pour atteindre la destination. Différent de "Request timeout" où les paquets sont envoyés mais sans réponse.
+}
+
+::OUTIL-13::[html]Un technicien utilise Wireshark et applique le filtre "tcp.port == 80". Qu'est-ce que ce filtre affiche ? {
+    =Uniquement les paquets TCP dont le port source OU destination est 80 (trafic HTTP)
+    ~Tous les paquets IP
+    ~Uniquement les paquets avec le port destination 80
+    ~Les paquets UDP sur le port 80
+    ####Le filtre Wireshark "tcp.port == 80" correspond aux paquets TCP avec le port 80 en source OU en destination — donc tout le trafic HTTP. Pour filtrer uniquement le port destination, utiliser "tcp.dst == 80". Pour source uniquement : "tcp.src == 80".
+}
+
+::OUTIL-14::[html]Quelle commande Linux permet de tester la résolution DNS et d'identifier quel serveur DNS a répondu ? {
+    =dig exemple.ca (affiche le serveur qui a répondu dans la section "SERVER:")
+    ~ping exemple.ca
+    ~traceroute exemple.ca
+    ~netstat -n
+    ####La commande "dig" (Domain Information Groper) est l'outil de diagnostic DNS le plus complet. Elle affiche la requête complète, la réponse, le serveur DNS utilisé, le TTL des enregistrements et le temps de réponse. "nslookup" est l'alternative multiplateforme.
+}
+
+::OUTIL-15::[html]Lors d'une capture Wireshark d'une connexion TCP, un technicien observe la séquence de flags : SYN → SYN,ACK → ACK. Que se passe-t-il ensuite pour terminer la connexion normalement ? {
+    =FIN → FIN,ACK → FIN → ACK (4-way handshake de fermeture) ou FIN,ACK → FIN,ACK
+    ~RST (Reset) immédiat
+    ~SYN → SYN,ACK → ACK (recommencer)
+    ~La connexion reste ouverte indéfiniment sans échange de fermeture
+    ####La fermeture TCP normale (graceful close) utilise 4 échanges : l'initiateur envoie FIN, l'autre répond ACK, puis envoie son propre FIN, et l'initiateur confirme avec ACK. RST est utilisé pour une fermeture abrupte (connexion refusée ou réinitialisée).
+}

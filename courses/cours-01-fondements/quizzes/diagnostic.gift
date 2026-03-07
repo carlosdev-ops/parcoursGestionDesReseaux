@@ -1,0 +1,169 @@
+// ============================================================
+// Cours 1 — Fondements des réseaux & modèles OSI/TCP-IP
+// Quiz diagnostic — 20 questions
+// Évalue les prérequis avant de commencer le cours
+// ============================================================
+
+$CATEGORY: $course$/Cours 1 — Diagnostic
+
+// --- Connaissances générales réseaux ---
+
+::DIAG-01::[html]Combien de couches comporte le modèle OSI ? {
+    =7
+    ~4
+    ~5
+    ~6
+    ####Le modèle OSI (Open Systems Interconnection) comporte 7 couches : Physique, Liaison de données, Réseau, Transport, Session, Présentation et Application.
+}
+
+::DIAG-02::[html]Quel équipement réseau opère principalement au niveau de la couche 3 (Réseau) du modèle OSI ? {
+    =Routeur
+    ~Switch
+    ~Hub
+    ~Répéteur
+    ####Le routeur opère à la couche 3 (Réseau) et prend des décisions de transmission basées sur les adresses IP. Le switch opère à la couche 2, le hub et le répéteur à la couche 1.
+}
+
+::DIAG-03::[html]Que signifie l'acronyme IP dans TCP/IP ? {
+    =Internet Protocol
+    ~Internal Protocol
+    ~Interconnection Protocol
+    ~Interface Protocol
+    ####IP signifie Internet Protocol. C'est le protocole de couche réseau responsable de l'adressage et du routage des paquets sur Internet.
+}
+
+::DIAG-04::[html]Quel protocole est utilisé pour résoudre automatiquement un nom de domaine (ex. : moodle.monecole.ca) en adresse IP ? {
+    =DNS (Domain Name System)
+    ~DHCP (Dynamic Host Configuration Protocol)
+    ~ARP (Address Resolution Protocol)
+    ~HTTP (HyperText Transfer Protocol)
+    ####DNS (Domain Name System) traduit les noms de domaine lisibles par l'humain en adresses IP numériques.
+}
+
+::DIAG-05::[html]Quelle est la longueur standard d'une adresse MAC (Media Access Control) ? {
+    =48 bits (6 octets)
+    ~32 bits (4 octets)
+    ~64 bits (8 octets)
+    ~128 bits (16 octets)
+    ####Une adresse MAC est composée de 48 bits (6 octets), généralement représentés en notation hexadécimale (ex. : AA:BB:CC:DD:EE:FF).
+}
+
+::DIAG-06::[html]Quelle commande permet de tester la connectivité réseau de base entre deux hôtes ? {
+    =ping
+    ~traceroute
+    ~netstat
+    ~nslookup
+    ####La commande ping envoie des paquets ICMP Echo Request et attend des Echo Reply pour tester la connectivité. C'est l'outil de diagnostic réseau le plus fondamental.
+}
+
+::DIAG-07::[html]Quel type de câblage est le plus couramment utilisé pour les connexions Ethernet dans un environnement de bureau ? {
+    =Paire torsadée non blindée (UTP — Unshielded Twisted Pair)
+    ~Fibre optique monomode (SMF)
+    ~Câble coaxial
+    ~Paire torsadée blindée (STP — Shielded Twisted Pair)
+    ####Le câblage UTP (Cat5e, Cat6, Cat6A) est le standard dominant pour les connexions Ethernet dans les bureaux, en raison de son faible coût et de sa facilité d'installation.
+}
+
+::DIAG-08::[html]Quel est le numéro de port standard du protocole HTTP (non chiffré) ? {
+    =80
+    ~443
+    ~21
+    ~22
+    ####HTTP utilise le port TCP 80 par défaut. HTTPS (HTTP sécurisé) utilise le port 443. FTP utilise le port 21, SSH utilise le port 22.
+}
+
+::DIAG-09::[html]Quelle couche du modèle OSI est responsable du contrôle de flux, de la segmentation et de la fiabilité de bout en bout ? {
+    =Couche 4 — Transport
+    ~Couche 3 — Réseau
+    ~Couche 5 — Session
+    ~Couche 2 — Liaison de données
+    ####La couche Transport (couche 4) gère la segmentation des données, le contrôle de flux, la correction d'erreurs et la livraison fiable (TCP) ou non fiable (UDP) de bout en bout.
+}
+
+::DIAG-10::[html]Quelle est la principale différence entre TCP et UDP ? {
+    =TCP est orienté connexion et fiable ; UDP est sans connexion et ne garantit pas la livraison
+    ~TCP est plus rapide qu'UDP dans tous les cas
+    ~UDP établit une connexion avant d'envoyer des données
+    ~TCP est utilisé uniquement pour la vidéo en temps réel
+    ####TCP (Transmission Control Protocol) établit une connexion (3-way handshake) et garantit la livraison ordonnée des données. UDP (User Datagram Protocol) est plus léger et rapide, sans garantie de livraison — utilisé pour DNS, streaming, jeux en ligne.
+}
+
+::DIAG-11::[html]Quel protocole permet l'attribution automatique d'adresses IP, masques de sous-réseau, passerelle et serveur DNS aux hôtes d'un réseau ? {
+    =DHCP (Dynamic Host Configuration Protocol)
+    ~DNS (Domain Name System)
+    ~ARP (Address Resolution Protocol)
+    ~ICMP (Internet Control Message Protocol)
+    ####DHCP automatise la configuration réseau des hôtes. Sans DHCP, chaque appareil devrait être configuré manuellement avec une adresse IP statique.
+}
+
+::DIAG-12::[html]Quelle commande affiche le chemin complet (les sauts/routeurs intermédiaires) emprunté par les paquets pour atteindre une destination ? {
+    =traceroute (Linux/Mac) ou tracert (Windows)
+    ~ping
+    ~netstat
+    ~arp -a
+    ####traceroute/tracert utilise des paquets avec des valeurs TTL (Time To Live) croissantes pour identifier chaque routeur sur le chemin vers la destination.
+}
+
+::DIAG-13::[html]À quelle couche du modèle OSI correspond le protocole IP (Internet Protocol) ? {
+    =Couche 3 — Réseau
+    ~Couche 2 — Liaison de données
+    ~Couche 4 — Transport
+    ~Couche 1 — Physique
+    ####IP opère à la couche 3 (Réseau). Il gère l'adressage logique et le routage des paquets entre réseaux différents.
+}
+
+::DIAG-14::[html]Quel type de fibre optique est utilisé pour les connexions longue distance (plusieurs kilomètres) comme les backbones opérateurs ? {
+    =Fibre monomode (SMF — Single Mode Fiber)
+    ~Fibre multimode (MMF — Multi Mode Fiber)
+    ~Câble UTP Cat6A
+    ~Câble coaxial RG-6
+    ####La fibre monomode (SMF) permet des transmissions sur des dizaines à des centaines de kilomètres. La fibre multimode est limitée à quelques centaines de mètres (utilisée en datacenter).
+}
+
+::DIAG-15::[html]Un switch Ethernet prend ses décisions de commutation (forwarding) en se basant sur quel type d'adresse ? {
+    =Adresses MAC (couche 2)
+    ~Adresses IP (couche 3)
+    ~Noms de domaine (DNS)
+    ~Numéros de port TCP/UDP
+    ####Le switch utilise sa table CAM (Content Addressable Memory) qui associe des adresses MAC aux ports physiques pour transmettre les trames Ethernet.
+}
+
+::DIAG-16::[html]Quel outil logiciel permet de capturer et d'analyser les trames réseau en temps réel sur une interface réseau ? {
+    =Wireshark
+    ~GNS3
+    ~Packet Tracer
+    ~Nmap
+    ####Wireshark est l'analyseur de protocoles (sniffer) le plus utilisé. Il capture les trames sur une interface réseau et les affiche en décodant chaque couche du modèle OSI.
+}
+
+::DIAG-17::[html]Quelle est la forme correcte d'une adresse IPv4 ? {
+    =192.168.1.100
+    ~192.168.1.100.50
+    ~192:168:1:100
+    ~192-168-1-100
+    ####Une adresse IPv4 est composée de 4 octets (32 bits) séparés par des points, chaque octet pouvant avoir une valeur de 0 à 255. Exemple : 192.168.1.100.
+}
+
+::DIAG-18::[html]Quelle couche OSI est responsable de la représentation, du chiffrement et de la compression des données ? {
+    =Couche 6 — Présentation
+    ~Couche 7 — Application
+    ~Couche 5 — Session
+    ~Couche 4 — Transport
+    ####La couche Présentation (couche 6) s'occupe du format des données, de leur encodage (ASCII, UTF-8), du chiffrement (SSL/TLS à l'origine) et de la compression.
+}
+
+::DIAG-19::[html]Quel est le rôle d'un hub (concentrateur) dans un réseau Ethernet ? {
+    =Répéter le signal électrique sur tous ses ports simultanément (broadcast physique)
+    ~Transmettre les trames uniquement vers le port destination selon l'adresse MAC
+    ~Router les paquets entre différents réseaux IP
+    ~Filtrer le trafic selon des règles de sécurité
+    ####Un hub est un répéteur multiport — il diffuse chaque signal reçu sur tous ses ports, créant un domaine de collision unique. C'est pourquoi il a été remplacé par les switches.
+}
+
+::DIAG-20::[html]Laquelle de ces affirmations décrit correctement le processus d'encapsulation dans le modèle OSI ? {
+    =Chaque couche ajoute son propre en-tête (et parfois un pied de page) aux données reçues de la couche supérieure
+    ~Chaque couche supprime les informations ajoutées par la couche supérieure
+    ~L'encapsulation se produit uniquement à la couche 3
+    ~Les données traversent les couches OSI de bas en haut lors de l'envoi
+    ####L'encapsulation est le processus par lequel chaque couche OSI ajoute ses propres informations de contrôle (en-tête) aux données lors de l'envoi. La désencapsulation retire ces en-têtes à la réception, de la couche 1 vers la couche 7.
+}

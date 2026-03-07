@@ -1,0 +1,126 @@
+// ============================================================
+// Cours 1 — Module 2 : Modèle TCP/IP et encapsulation
+// Quiz formatif — 15 questions
+// ============================================================
+
+$CATEGORY: $course$/Cours 1 — Module 2 — TCP/IP et encapsulation
+
+::TCPIP-01::[html]Combien de couches comporte le modèle TCP/IP ? {
+    =4
+    ~7
+    ~5
+    ~3
+    ####Le modèle TCP/IP comporte 4 couches : Accès réseau, Internet, Transport et Application. Il est plus simple que le modèle OSI à 7 couches, mais c'est lui qui est réellement implémenté sur Internet.
+}
+
+::TCPIP-02::[html]À quelle couche du modèle TCP/IP correspond la couche "Internet" ? {
+    =Couche 3 du modèle OSI (Réseau)
+    ~Couche 2 du modèle OSI (Liaison de données)
+    ~Couche 4 du modèle OSI (Transport)
+    ~Couches 5-6-7 du modèle OSI
+    ####La couche Internet du modèle TCP/IP correspond à la couche Réseau (couche 3) du modèle OSI. Elle inclut le protocole IP pour l'adressage et le routage.
+}
+
+::TCPIP-03::[html]Quelle couche du modèle TCP/IP regroupe les fonctions des couches OSI Session, Présentation et Application ? {
+    =Couche Application (TCP/IP)
+    ~Couche Transport (TCP/IP)
+    ~Couche Internet (TCP/IP)
+    ~Couche Accès réseau (TCP/IP)
+    ####La couche Application du modèle TCP/IP est une couche "fusionnée" qui englobe les couches OSI 5 (Session), 6 (Présentation) et 7 (Application). Elle inclut des protocoles comme HTTP, DNS, SMTP, SSH.
+}
+
+::TCPIP-04::[html]Qu'est-ce que le MTU (Maximum Transmission Unit) ? {
+    =La taille maximale d'un paquet pouvant être transmis sur un lien réseau sans fragmentation
+    ~La vitesse maximale de transmission en bits par seconde
+    ~Le nombre maximum de connexions simultanées sur un serveur
+    ~La distance maximale d'un câble Ethernet
+    ####Le MTU définit la taille maximale d'un paquet (en octets) sur un lien. Pour Ethernet, le MTU standard est de 1500 octets. Si un paquet est plus grand, il doit être fragmenté par IP ou la connexion doit utiliser la découverte du MTU de chemin (Path MTU Discovery).
+}
+
+::TCPIP-05::[html]Dans un en-tête TCP, quel champ permet de s'assurer que les segments sont réassemblés dans le bon ordre à la destination ? {
+    =Numéro de séquence (Sequence Number)
+    ~Port source
+    ~Checksum
+    ~Flags (SYN, ACK, FIN)
+    ####Le numéro de séquence TCP identifie la position de chaque segment dans le flux de données. La destination utilise ces numéros pour réassembler les segments dans l'ordre correct, même s'ils arrivent dans le désordre.
+}
+
+::TCPIP-06::[html]Quel est le processus d'établissement de connexion TCP appelé "3-way handshake" ? {
+    =SYN → SYN-ACK → ACK
+    ~ACK → SYN → SYN-ACK
+    ~SYN → ACK → FIN
+    ~HELLO → CONNECT → READY
+    ####Le 3-way handshake TCP établit une connexion en 3 étapes : (1) Le client envoie SYN, (2) le serveur répond SYN-ACK, (3) le client confirme avec ACK. La connexion est alors établie.
+}
+
+::TCPIP-07::[html]Quelle est la différence fondamentale entre TCP et UDP en termes de fiabilité ? {
+    =TCP garantit la livraison et l'ordre des données avec accusés de réception ; UDP envoie sans confirmation
+    ~UDP est plus fiable car il envoie les données plus rapidement
+    ~TCP et UDP offrent le même niveau de fiabilité
+    ~UDP vérifie les erreurs mais ne corrige pas
+    ####TCP utilise des accusés de réception (ACK), des numéros de séquence et la retransmission pour garantir que les données arrivent complètes et dans l'ordre. UDP n'offre aucune de ces garanties, mais est plus léger et rapide.
+}
+
+::TCPIP-08::[html]Quel protocole de la couche Internet du modèle TCP/IP est utilisé pour envoyer des messages d'erreur et de diagnostic (ex. : destination inaccessible, TTL expiré) ? {
+    =ICMP (Internet Control Message Protocol)
+    ~ARP (Address Resolution Protocol)
+    ~DHCP (Dynamic Host Configuration Protocol)
+    ~DNS (Domain Name System)
+    ####ICMP est le protocole de diagnostic de la couche Internet. La commande ping utilise des messages ICMP Echo Request/Reply. traceroute utilise des messages ICMP Time Exceeded pour cartographier le chemin.
+}
+
+::TCPIP-09::[html]Lors de la capture Wireshark d'un paquet HTTP, dans quel ordre les en-têtes apparaissent-ils (de l'externe vers l'interne) ? {
+    =En-tête Ethernet → En-tête IP → En-tête TCP → Données HTTP
+    ~En-tête HTTP → En-tête TCP → En-tête IP → En-tête Ethernet
+    ~En-tête IP → En-tête TCP → En-tête Ethernet → Données HTTP
+    ~En-tête TCP → En-tête IP → En-tête HTTP → En-tête Ethernet
+    ####L'encapsulation ajoute les en-têtes de haut en bas : HTTP est encapsulé dans TCP, qui est encapsulé dans IP, qui est encapsulé dans une trame Ethernet. Wireshark les affiche dans l'ordre de la couche la plus basse (externe) vers la plus haute (interne).
+}
+
+::TCPIP-10::[html]Qu'est-ce que le port TCP/UDP numéro 443 identifie ? {
+    =HTTPS (HTTP sécurisé avec TLS)
+    ~HTTP standard
+    ~FTP
+    ~SSH
+    ####Le port 443 est réservé à HTTPS — le protocole HTTP sécurisé par TLS/SSL. HTTP standard utilise le port 80, FTP le port 21, SSH le port 22.
+}
+
+::TCPIP-11::[html]Quel protocole de la couche Accès réseau du modèle TCP/IP résout les adresses IP en adresses MAC sur un réseau local ? {
+    =ARP (Address Resolution Protocol)
+    ~DNS (Domain Name System)
+    ~RARP (Reverse ARP)
+    ~ICMP
+    ####ARP envoie une requête broadcast "Qui a l'adresse IP x.x.x.x ?" et l'hôte concerné répond avec son adresse MAC. Cette association est mise en cache dans la table ARP locale.
+}
+
+::TCPIP-12::[html]Quelle est la taille de l'en-tête IPv4 minimal (sans options) ? {
+    =20 octets (160 bits)
+    ~8 octets (64 bits)
+    ~40 octets (320 bits)
+    ~14 octets (112 bits)
+    ####L'en-tête IPv4 minimal est de 20 octets. Il contient les champs : version, IHL, DSCP, longueur totale, identification, flags, fragment offset, TTL, protocole, checksum, adresse source et adresse destination.
+}
+
+::TCPIP-13::[html]Dans quel scénario UDP est-il préférable à TCP ? {
+    =Streaming vidéo en direct et jeux en ligne temps réel
+    ~Transfert de fichiers importants
+    ~Navigation web sécurisée (HTTPS)
+    ~Envoi de courriels
+    ####UDP est préféré quand la latence est plus importante que la fiabilité : streaming en direct, jeux en ligne, VoIP, DNS. Une légère perte de paquets est acceptable, mais un retard dû à la retransmission TCP serait problématique.
+}
+
+::TCPIP-14::[html]Qu'est-ce que la fragmentation IP et quand se produit-elle ? {
+    =Division d'un paquet IP en fragments plus petits quand sa taille dépasse le MTU du lien
+    ~Compression des données pour réduire la bande passante
+    ~Chiffrement des paquets pour la sécurité
+    ~Duplication des paquets pour la redondance
+    ####Si un paquet IP est plus grand que le MTU du lien (ex. 1500 octets pour Ethernet), le routeur le fragmente en morceaux plus petits. La reassemblage se fait à la destination finale. IPv6 ne permet pas la fragmentation par les routeurs intermédiaires.
+}
+
+::TCPIP-15::[html]Un technicien capture du trafic DNS avec Wireshark. Quel protocole de transport s'attend-il à voir dans la plupart des requêtes DNS standard ? {
+    =UDP sur le port 53
+    ~TCP sur le port 53
+    ~ICMP
+    ~TCP sur le port 80
+    ####Les requêtes DNS utilisent UDP (port 53) pour les requêtes simples car c'est plus rapide. TCP (port 53) est utilisé pour les transferts de zone DNS (AXFR) et pour les réponses DNS dont la taille dépasse 512 octets (ou 1232 octets avec EDNS0).
+}

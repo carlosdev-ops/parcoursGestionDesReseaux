@@ -1,0 +1,126 @@
+// ============================================================
+// Cours 1 — Module 3 : Médias et équipements réseau
+// Quiz formatif — 15 questions
+// ============================================================
+
+$CATEGORY: $course$/Cours 1 — Module 3 — Médias et équipements
+
+::MED-01::[html]Quelle catégorie de câble UTP supporte le Gigabit Ethernet (1000BASE-T) sur une distance maximale de 100 mètres ? {
+    =Cat5e (ou supérieur : Cat6, Cat6A)
+    ~Cat3
+    ~Cat4
+    ~Cat7 uniquement
+    ####Cat5e (Enhanced Category 5) est le minimum pour le Gigabit Ethernet sur 100 m. Cat6 offre de meilleures performances. Cat6A supporte le 10GBASE-T sur 100 m. Cat3 supporte seulement le 10/100 Mbps.
+}
+
+::MED-02::[html]Quelle est la principale différence entre la fibre optique monomode (SMF) et la fibre multimode (MMF) ? {
+    =SMF a un cœur plus petit (9 µm), supporte de plus longues distances ; MMF a un cœur plus grand (50/62,5 µm), limité à quelques centaines de mètres
+    ~MMF est plus rapide que SMF pour toutes les distances
+    ~SMF est moins cher que MMF
+    ~MMF et SMF sont interchangeables à toutes distances
+    ####SMF (9 µm de cœur) guide la lumière en un seul mode, permettant des distances de plusieurs dizaines de km (backbone opérateur). MMF (50 ou 62,5 µm) permet plusieurs modes de propagation, limité à ~300-550 m (datacenter, campus).
+}
+
+::MED-03::[html]Quel type de connecteur de fibre optique est le plus couramment utilisé dans les infrastructures télécom (FTTH, backbone HFC) et offre un contact physique angulé (APC — Angled Physical Contact) ? {
+    =SC/APC (Subscriber Connector / Angled Physical Contact)
+    ~RJ-45
+    ~LC/UPC
+    ~ST (Straight Tip)
+    ####Le connecteur SC/APC est standard dans les réseaux FTTH (Fiber To The Home) et HFC. La finition APC (polissage angulé à 8°) réduit les réflexions à -60 dB vs -40 dB pour UPC, critique pour les signaux RF sur fibre.
+}
+
+::MED-04::[html]Quelle est la principale limite d'un hub (concentrateur) par rapport à un switch ? {
+    =Le hub crée un seul domaine de collision — tous les hôtes partagent la bande passante et entrent en collision
+    ~Le hub est plus lent à configurer
+    ~Le hub ne supporte pas le protocole TCP/IP
+    ~Le hub ne peut connecter que 4 appareils maximum
+    ####Un hub répète le signal sur tous ses ports (couche 1) créant un seul domaine de collision. Avec Ethernet CSMA/CD, un seul hôte peut émettre à la fois. Le switch (couche 2) crée un domaine de collision par port, éliminant les collisions en mode full-duplex.
+}
+
+::MED-05::[html]Un câble Ethernet "droit" (straight-through) est utilisé pour connecter quel type d'appareils ? {
+    =Un appareil terminal (PC, serveur) vers un équipement réseau (switch, hub)
+    ~Deux switches ensemble
+    ~Deux PCs directement entre eux
+    ~Un routeur vers un autre routeur
+    ####Les câbles droits (T568A-T568A ou T568B-T568B) connectent des appareils de types différents : PC→switch, PC→hub, switch→routeur. Les câbles croisés (crossover) connectent des appareils de même type : PC→PC, switch→switch. Les équipements modernes avec Auto-MDIX détectent automatiquement.
+}
+
+::MED-06::[html]Qu'est-ce qu'un répéteur réseau et pourquoi est-il utilisé ? {
+    =Un équipement couche 1 qui régénère et amplifie le signal électrique pour étendre la portée d'un câble
+    ~Un équipement qui traduit les adresses IP en adresses MAC
+    ~Un équipement qui filtre le trafic réseau selon des règles de sécurité
+    ~Un équipement qui compresse les données pour augmenter la vitesse
+    ####Le signal électrique s'atténue sur le câble (atténuation). Un répéteur régénère le signal pour étendre la portée au-delà de la limite de 100 m pour UTP. Il opère à la couche 1 et ne comprend pas les adresses MAC ou IP.
+}
+
+::MED-07::[html]Sur quel support physique le câble coaxial RG-6 est-il principalement utilisé dans un réseau HFC (Hybrid Fiber-Coaxial) ? {
+    =La portion "dernier kilomètre" entre le nœud optique et les prises des abonnés
+    ~Le backbone entre les têtes de réseau (headends)
+    ~La connexion entre serveurs dans un datacenter
+    ~Les liaisons inter-campus universitaires
+    ####Dans un réseau HFC, la fibre optique relie la tête de réseau aux nœuds optiques de quartier. Le câble coaxial RG-6 couvre le dernier kilomètre entre le nœud et les habitations des abonnés (distribution et branchement).
+}
+
+::MED-08::[html]Qu'est-ce que le "full-duplex" dans une connexion Ethernet ? {
+    =La capacité à émettre et recevoir simultanément sur le même lien, sans collisions
+    ~Une connexion qui double la vitesse en utilisant deux câbles
+    ~Un mode de transmission qui compresse les données avant envoi
+    ~La capacité à connecter plus de deux appareils sur le même câble
+    ####En full-duplex, chaque appareil peut émettre et recevoir en même temps sur le même lien physique (grâce aux paires torsadées séparées pour TX et RX). Cela nécessite un switch (et non un hub). Il n'y a pas de collision en full-duplex, donc CSMA/CD n'est pas utilisé.
+}
+
+::MED-09::[html]Quelle est la distance maximale théorique pour un câble UTP Cat6 dans une connexion Gigabit Ethernet (1000BASE-T) ? {
+    =100 mètres
+    ~50 mètres
+    ~300 mètres
+    ~500 mètres
+    ####La norme Ethernet impose une limite de 100 mètres pour le câblage UTP (Cat5e, Cat6, Cat6A) pour 10/100/1000 Mbps. Au-delà, il faut utiliser la fibre optique ou des répéteurs.
+}
+
+::MED-10::[html]Quel standard définit le câblage à paires torsadées non blindées (UTP) pour les réseaux locaux et les prises RJ-45 ? {
+    =TIA/EIA-568 (ANSI/TIA-568)
+    ~IEEE 802.11
+    ~RFC 1918
+    ~ISO/IEC 11801
+    ####TIA/EIA-568 est le standard américain qui définit le câblage de réseau structuré : types de câbles (Cat5e, Cat6...), connecteurs RJ-45 et l'ordre de câblage T568A et T568B. ISO/IEC 11801 est l'équivalent international.
+}
+
+::MED-11::[html]Quel équipement de couche 3 est capable de connecter des réseaux IP différents et de sélectionner le meilleur chemin pour acheminer les paquets ? {
+    =Routeur
+    ~Switch de couche 2
+    ~Hub
+    ~Répéteur
+    ####Le routeur opère à la couche 3 (IP). Il maintient une table de routage et sélectionne le meilleur chemin pour chaque paquet selon l'adresse IP destination. Il sépare aussi les domaines de broadcast.
+}
+
+::MED-12::[html]Qu'est-ce qu'un pare-feu (firewall) réseau et à quelle(s) couche(s) peut-il opérer ? {
+    =Un équipement qui filtre le trafic réseau selon des règles ; peut opérer de la couche 3 à la couche 7
+    ~Un équipement exclusivement physique qui protège les câbles
+    ~Un équipement qui accélère la transmission des données
+    ~Un équipement qui opère uniquement à la couche 2
+    ####Les pare-feux filtrent le trafic. Un pare-feu de couche 3 filtre par adresse IP, couche 4 par port TCP/UDP, couche 7 (pare-feu applicatif / NGFW) inspecte le contenu des applications (HTTP, DNS, etc.). Les NGFW modernes intègrent IDS/IPS.
+}
+
+::MED-13::[html]Dans une topologie en étoile (star topology), quel est le point de connexion central qui relie tous les appareils ? {
+    =Un switch (ou hub dans les anciennes installations)
+    ~Un routeur
+    ~Un serveur de fichiers
+    ~Un modem câble
+    ####La topologie en étoile est la plus utilisée dans les LAN modernes. Tous les hôtes se connectent à un switch central. Si le switch tombe, tout le réseau est affecté — c'est le seul point de défaillance (SPOF).
+}
+
+::MED-14::[html]Quelle technologie sans fil (Wi-Fi) opère sur les bandes de fréquence 2,4 GHz et 5 GHz selon la norme IEEE 802.11ac ? {
+    =Wi-Fi 5 (IEEE 802.11ac) opère principalement sur 5 GHz ; 2,4 GHz reste disponible via 802.11n
+    ~Wi-Fi 5 opère uniquement sur 2,4 GHz
+    ~Wi-Fi 5 opère sur 6 GHz uniquement
+    ~IEEE 802.11ac est une norme filaire
+    ####IEEE 802.11ac (Wi-Fi 5) opère principalement sur la bande 5 GHz pour des vitesses jusqu'à 3,5 Gbps. La bande 2,4 GHz est utilisée par 802.11b/g/n (Wi-Fi 4). Wi-Fi 6E ajoute la bande 6 GHz.
+}
+
+::MED-15::[html]Lors de l'installation d'un câble de fibre optique, quel outil est utilisé pour mesurer l'atténuation, localiser les coupures et caractériser les connecteurs ? {
+    =OTDR (Optical Time Domain Reflectometer)
+    ~Multimètre électrique
+    ~Testeur de câble UTP (câbloscope)
+    ~Analyseur de spectre RF
+    ####L'OTDR envoie des impulsions lumineuses dans la fibre et analyse les réflexions pour mesurer l'atténuation par mètre, localiser les défauts, soudures et connecteurs, et calculer la longueur totale de la fibre.
+}

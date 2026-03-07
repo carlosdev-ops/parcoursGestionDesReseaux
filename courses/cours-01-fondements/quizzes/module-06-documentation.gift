@@ -1,0 +1,126 @@
+// ============================================================
+// Cours 1 — Module 6 : Documentation et nomenclature NOC
+// Quiz formatif — 15 questions
+// ============================================================
+
+$CATEGORY: $course$/Cours 1 — Module 6 — Documentation NOC
+
+::DOC-01::[html]Pourquoi la documentation réseau est-elle considérée comme une compétence critique dans un contexte NOC (Network Operations Center) ? {
+    =Elle permet l'intervention rapide lors d'incidents, la continuité des opérations entre équipes et la traçabilité des changements
+    ~Elle est uniquement requise pour les audits annuels de conformité
+    ~Elle remplace la formation technique des techniciens
+    ~Elle n'est nécessaire que pour les très grands réseaux (plus de 1000 équipements)
+    ####Dans un NOC, la documentation permet : résolution rapide d'incidents (on sait où regarder), passage de relève entre quarts de travail, gestion des changements (change management), dépannage par des techniciens qui n'ont pas installé le système. Sans documentation, chaque incident est plus long à résoudre.
+}
+
+::DOC-02::[html]Quel outil open source, basé sur le web, est couramment utilisé pour créer des diagrammes réseau (topologies, architectures) directement dans un navigateur ? {
+    =draw.io (diagrams.net)
+    ~Microsoft Paint
+    ~Excel
+    ~Notepad
+    ####draw.io (diagrams.net) est un outil de diagramme gratuit et open source qui s'utilise en ligne ou hors ligne. Il supporte les bibliothèques de symboles réseau (Cisco, AWS, etc.) et peut exporter en PNG, SVG ou PDF. L'alternative commerciale est Microsoft Visio.
+}
+
+::DOC-03::[html]Qu'est-ce qu'un schéma de topologie logique (Logical Network Diagram) ? {
+    =Un diagramme qui montre comment les données circulent — adresses IP, VLANs, protocoles de routage — sans représenter l'emplacement physique des équipements
+    ~Un schéma qui montre l'emplacement physique précis de chaque câble dans le bâtiment
+    ~Un plan d'étage avec les prises réseau
+    ~Un diagramme qui montre uniquement les équipements actifs (sans câblage)
+    ####La topologie logique représente l'organisation des adresses IP, des sous-réseaux, des VLANs et des protocoles. La topologie physique montre l'emplacement réel des équipements et le tracé des câbles. Les deux types de documentation sont complémentaires.
+}
+
+::DOC-04::[html]Quelle convention de nommage est la plus appropriée pour identifier un routeur de bordure (edge router) situé à Montréal, dans le Point de Présence (POP) 1 ? {
+    =MTL-POP1-RTR-EDGE-01
+    ~routeur1
+    ~R1
+    ~Montreal_Router
+    ####Une bonne convention de nommage NOC inclut : site/ville (MTL), localisation (POP1), type d'équipement (RTR), rôle (EDGE) et numéro séquentiel (01). Cela permet d'identifier immédiatement le contexte d'un équipement dans une alerte ou un log sans consulter la documentation.
+}
+
+::DOC-05::[html]Qu'est-ce qu'un tableau d'inventaire réseau (Network Inventory) et quelles informations minimales doit-il contenir ? {
+    =Un registre de tous les équipements réseau incluant : nom, type, adresse IP de gestion, numéro de série, version de firmware, localisation physique
+    ~Uniquement la liste des adresses IP utilisées
+    ~Un document qui liste uniquement les équipements en panne
+    ~Le catalogue des équipements disponibles à l'achat
+    ####L'inventaire réseau est la base de la gestion NOC. Il doit inclure au minimum : hostname, type (switch/routeur/firewall), fabricant/modèle, adresse IP de gestion, localisation, numéro de série (pour RMA), version de firmware/IOS, et date d'installation. Des outils comme Netbox automatisent cet inventaire.
+}
+
+::DOC-06::[html]Quel est le rôle d'un "runbook" dans les opérations NOC ? {
+    =Un document qui décrit les procédures pas-à-pas pour gérer des scénarios opérationnels spécifiques (incidents, maintenances, changements)
+    ~Un journal de bord des incidents passés
+    ~Un catalogue de commandes réseau sans contexte d'utilisation
+    ~Un rapport mensuel de performance réseau
+    ####Un runbook (ou playbook) est un guide opérationnel qui décrit : comment répondre à une alerte spécifique, les commandes à exécuter, les personnes à contacter (escalade), les procédures de maintenance. Il permet à n'importe quel technicien de traiter un incident, même sans expérience sur ce type d'alerte.
+}
+
+::DOC-07::[html]Dans un système de ticketing NOC (ex. : ServiceNow, JIRA), quelle information est ESSENTIELLE à documenter lors de l'ouverture d'un ticket d'incident ? {
+    =Horodatage précis de détection, symptômes observés, équipements affectés, impact sur les services, actions déjà tentées
+    ~Uniquement le nom du technicien qui ouvre le ticket
+    ~Le numéro de téléphone du fournisseur d'équipement
+    ~La facture d'achat de l'équipement défaillant
+    ####Un bon ticket d'incident doit répondre aux questions : Quand ? (horodatage) Quoi ? (symptômes) Où ? (équipements, sites) Impact ? (services affectés, nombre d'usagers) Actions déjà prises ? (ne pas répéter ce qui a échoué). Cette documentation accélère la résolution et facilite l'analyse post-incident (post-mortem / RCA).
+}
+
+::DOC-08::[html]Quel standard de symboles graphiques est le plus reconnu pour représenter les équipements réseau Cisco dans les diagrammes de topologie ? {
+    =Les icônes officielles Cisco (disponibles dans draw.io, Visio, et le Cisco Network Topology Icons pack)
+    ~Les emojis standards Unicode
+    ~Les symboles mathématiques ISO
+    ~Il n'existe pas de standard — chaque entreprise crée ses propres symboles
+    ####Cisco a publié ses icônes officielles de topologie réseau (routeurs, switches, clouds, etc.) qui sont devenues un standard de facto dans l'industrie. draw.io et Visio incluent des bibliothèques d'icônes Cisco. L'utilisation de symboles standardisés facilite la communication entre techniciens et équipes.
+}
+
+::DOC-09::[html]Qu'est-ce qu'un plan d'adressage IP (IP Address Plan) et pourquoi est-il critique dans une organisation ? {
+    =Un document qui répertorie tous les sous-réseaux, leur affectation (VLAN, site, fonction) et les adresses IP réservées — évite les conflits d'adresses et facilite le dépannage
+    ~Un document qui liste uniquement les adresses des serveurs publics
+    ~Un plan de câblage physique des prises réseau
+    ~Un schéma des protocoles de routage utilisés
+    ####Sans plan d'adressage, les conflits d'adresses IP (deux appareils avec la même IP) sont inévitables. Un bon plan documente : les plages allouées par site/VLAN/fonction, les adresses réservées (passerelles, serveurs, imprimantes), le DHCP scope et les exclusions. Des outils comme NetBox ou phpIPAM gèrent l'IPAM (IP Address Management).
+}
+
+::DOC-10::[html]Quel format de fichier texte est couramment utilisé pour documenter les configurations réseau (commandes Cisco IOS, scripts Bash) de façon lisible et versionnable dans git ? {
+    =Texte brut (.txt) ou Markdown (.md) pour la documentation, combiné avec les fichiers de configuration originaux
+    ~Format binaire .bin (non lisible)
+    ~PDF uniquement
+    ~Format Excel .xlsx
+    ####Les configurations réseau et scripts sont mieux gérés en texte brut (.txt, .cfg) pour être versionnés dans git. La documentation complémentaire (contexte, décisions) est écrite en Markdown (.md). Git permet de voir l'historique des changements, qui a modifié quoi et pourquoi (via les messages de commit).
+}
+
+::DOC-11::[html]Qu'est-ce qu'une analyse post-incident (Post-Incident Review / Post-mortem) dans un contexte NOC ? {
+    =Une réunion et un document qui analysent les causes racines d'un incident majeur, la timeline des événements et les actions correctives pour éviter la récurrence
+    ~Une réunion pour sanctionner les techniciens responsables de l'incident
+    ~Un rapport qui liste uniquement les équipements remplacés
+    ~Une réunion commerciale pour évaluer l'impact financier
+    ####Une bonne culture NOC adopte l'approche "blameless post-mortem" (sans blâme) : l'objectif est de comprendre les causes systémiques, pas de blâmer des individus. Le document résultant inclut : timeline, cause racine (RCA — Root Cause Analysis), impact, actions correctives à court et long terme.
+}
+
+::DOC-12::[html]Lors de la documentation d'un changement réseau (change management), quelle information doit TOUJOURS être incluse dans la demande de changement (Change Request) ? {
+    =Plan de retour arrière (rollback plan) détaillant comment annuler le changement si quelque chose tourne mal
+    ~Uniquement la description du changement prévu
+    ~Le coût en heures du changement
+    ~La liste de tous les techniciens disponibles cette semaine
+    ####Le plan de retour arrière (rollback plan) est critique. En production, tout changement peut avoir des effets inattendus. Avoir un plan clair pour revenir à l'état antérieur limite l'impact d'un changement raté. Une bonne demande de changement inclut aussi : fenêtre de maintenance, risques identifiés, tests de validation post-changement.
+}
+
+::DOC-13::[html]Quel outil open source est spécifiquement conçu pour la gestion d'inventaire réseau (IPAM, DCIM) et utilisé par de nombreux opérateurs ? {
+    =NetBox (développé par DigitalOcean, maintenant NetBox Labs)
+    ~Microsoft Excel
+    ~Wireshark
+    ~GNS3
+    ####NetBox est une plateforme web open source de documentation réseau et d'infrastructure (IPAM = IP Address Management, DCIM = Data Center Infrastructure Management). Elle gère : adresses IP, sous-réseaux, VLANs, équipements, câblage, circuits. Elle offre aussi une API REST pour l'automatisation.
+}
+
+::DOC-14::[html]Un technicien NOC rédige une procédure d'escalade pour les incidents BGP. Quel est l'élément LE PLUS IMPORTANT à inclure ? {
+    =Critères clairs qui déclenchent l'escalade (ex. : durée de l'incident, nombre de clients affectés, type d'alarme) et contacts nommés par niveau d'escalade
+    ~La liste de tous les fournisseurs d'équipement réseau
+    ~Les spécifications techniques du protocole BGP
+    ~Le budget alloué pour les incidents BGP
+    ####Une procédure d'escalade efficace définit : QUAND escalader (critères objectifs : durée > X min, > Y clients affectés, criticité Z), QUI contacter (noms, rôles, téléphones), et COMMENT (téléphone, ticket, War Room). Sans critères clairs, les techniciens hésitent à escalader et l'incident dure plus longtemps.
+}
+
+::DOC-15::[html]Dans la nomenclature des interfaces Cisco IOS, que représente "GigabitEthernet0/1" ? {
+    =Une interface GigabitEthernet sur le slot 0, port 1 de l'équipement
+    ~Une interface de 0,1 Gigabit par seconde
+    ~Une interface virtuelle VLAN 1
+    ~Un tunnel GRE numéro 1
+    ####La nomenclature Cisco pour les interfaces suit le format : [Type][Slot]/[Port] ou [Type][Slot]/[Sous-slot]/[Port]. GigabitEthernet0/1 = interface Gigabit Ethernet, slot 0, port 1. Les abréviations courantes : Gi (GigabitEthernet), Fa (FastEthernet), Te (TenGigabitEthernet), Lo (Loopback), Tu (Tunnel).
+}

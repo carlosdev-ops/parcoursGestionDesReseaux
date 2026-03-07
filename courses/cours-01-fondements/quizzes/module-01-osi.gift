@@ -1,0 +1,126 @@
+// ============================================================
+// Cours 1 — Module 1 : Modèle OSI — les 7 couches
+// Quiz formatif — 15 questions
+// ============================================================
+
+$CATEGORY: $course$/Cours 1 — Module 1 — Modèle OSI
+
+::OSI-01::[html]Quel est le nom de la couche OSI numéro 1 ? {
+    =Couche Physique
+    ~Couche Liaison de données
+    ~Couche Réseau
+    ~Couche Transport
+    ####La couche 1 est la couche Physique. Elle s'occupe de la transmission des bits bruts sur le support physique (câbles, fibre, ondes radio).
+}
+
+::OSI-02::[html]Quelle couche OSI est responsable de la détection et de la correction d'erreurs dans la transmission sur le lien local, ainsi que de l'adressage physique (MAC) ? {
+    =Couche 2 — Liaison de données
+    ~Couche 1 — Physique
+    ~Couche 3 — Réseau
+    ~Couche 4 — Transport
+    ####La couche Liaison de données (couche 2) gère la détection d'erreurs (CRC), l'adressage MAC et la livraison fiable des trames sur un lien physique donné. Elle est subdivisée en LLC et MAC.
+}
+
+::OSI-03::[html]Quel est le nom de l'unité de données protocolaire (PDU) à la couche 4 (Transport) ? {
+    =Segment (TCP) / Datagramme (UDP)
+    ~Trame
+    ~Paquet
+    ~Bit
+    ####À la couche Transport, la PDU est appelée Segment pour TCP et Datagramme pour UDP. À la couche 3 c'est un Paquet, à la couche 2 une Trame, à la couche 1 un Bit.
+}
+
+::OSI-04::[html]Associez chaque couche OSI à la PDU correspondante. Quelle PDU correspond à la couche 2 — Liaison de données ? {
+    =Trame (Frame)
+    ~Paquet (Packet)
+    ~Segment
+    ~Bit
+    ####La trame (Frame) est la PDU de la couche 2. Elle encapsule le paquet IP et ajoute l'adresse MAC source, l'adresse MAC destination et un FCS (Frame Check Sequence) pour la détection d'erreurs.
+}
+
+::OSI-05::[html]Quel équipement réseau opère spécifiquement à la couche 2 (Liaison de données) du modèle OSI ? {
+    =Switch (commutateur)
+    ~Routeur
+    ~Hub
+    ~Pare-feu de couche 7
+    ####Le switch opère à la couche 2 et utilise les adresses MAC pour commuter les trames. Le routeur opère à la couche 3, le hub à la couche 1.
+}
+
+::OSI-06::[html]Quelle couche OSI gère l'établissement, le maintien et la terminaison des sessions de communication entre applications ? {
+    =Couche 5 — Session
+    ~Couche 4 — Transport
+    ~Couche 6 — Présentation
+    ~Couche 7 — Application
+    ####La couche Session (couche 5) établit, synchronise et termine les dialogues entre applications. Elle gère aussi les reprises en cas d'interruption (checkpoints).
+}
+
+::OSI-07::[html]Dans le processus d'encapsulation, dans quel ordre les couches OSI traitent-elles les données lors de l'ENVOI d'un message ? {
+    =De la couche 7 (Application) vers la couche 1 (Physique)
+    ~De la couche 1 (Physique) vers la couche 7 (Application)
+    ~De la couche 4 (Transport) vers la couche 7 puis vers la couche 1
+    ~Les couches traitent les données simultanément
+    ####Lors de l'envoi, les données descendent des couches hautes vers les couches basses (7→1), chaque couche ajoutant son en-tête. À la réception, le processus inverse (désencapsulation) remonte de 1→7.
+}
+
+::OSI-08::[html]Quel protocole de la couche Application (couche 7) est utilisé pour le transfert sécurisé de fichiers et l'administration à distance de serveurs Linux ? {
+    =SSH (Secure Shell)
+    ~FTP (File Transfer Protocol)
+    ~Telnet
+    ~SNMP
+    ####SSH (port 22) chiffre toutes les communications et est le standard pour l'administration à distance. FTP (ports 20/21) transfère des fichiers mais en clair. Telnet est obsolète (non chiffré).
+}
+
+::OSI-09::[html]Laquelle de ces affirmations sur le modèle OSI est VRAIE ? {
+    =Le modèle OSI est un modèle de référence théorique ; TCP/IP est le modèle implémenté sur Internet
+    ~Le modèle OSI est identique au modèle TCP/IP
+    ~TCP/IP comporte 7 couches comme OSI
+    ~Le modèle OSI est utilisé directement par tous les équipements modernes
+    ####OSI est un modèle de référence conceptuel développé par l'ISO. TCP/IP (avec 4 couches) est le modèle pratique effectivement implémenté sur Internet. OSI reste précieux pour comprendre et dépanner les réseaux.
+}
+
+::OSI-10::[html]À quelle couche OSI opèrent les protocoles SSL/TLS qui sécurisent les connexions HTTPS ? {
+    =Couche 6 — Présentation (selon OSI classique) / Entre Transport et Application (selon TCP/IP)
+    ~Couche 1 — Physique
+    ~Couche 2 — Liaison de données
+    ~Couche 3 — Réseau
+    ####SSL/TLS est généralement associé à la couche Présentation (couche 6) dans le modèle OSI car il s'occupe du chiffrement des données. Dans le modèle TCP/IP pratique, il opère entre la couche Transport et Application.
+}
+
+::OSI-11::[html]Quel est le rôle principal de la couche Réseau (couche 3) du modèle OSI ? {
+    =Adressage logique et routage des paquets entre différents réseaux
+    ~Transmission physique des bits sur le câble
+    ~Contrôle de flux et fiabilité de la transmission
+    ~Détection d'erreurs sur le lien local
+    ####La couche Réseau s'occupe de l'adressage logique (IP) et du routage — c'est-à-dire choisir le meilleur chemin pour acheminer les paquets d'un réseau source à un réseau destination, potentiellement à travers plusieurs routeurs.
+}
+
+::OSI-12::[html]Un technicien analyse une trame Ethernet capturée avec Wireshark. Il voit les champs "Source MAC", "Destination MAC" et "EtherType". À quelle couche OSI correspondent ces informations ? {
+    =Couche 2 — Liaison de données
+    ~Couche 3 — Réseau
+    ~Couche 1 — Physique
+    ~Couche 4 — Transport
+    ####Les adresses MAC (Source et Destination) et l'EtherType sont des champs de l'en-tête de trame Ethernet, qui opère à la couche 2. L'EtherType indique le protocole encapsulé (0x0800 pour IPv4, 0x86DD pour IPv6).
+}
+
+::OSI-13::[html]Quelle est la fonction du champ TTL (Time To Live) dans l'en-tête d'un paquet IP ? {
+    =Limiter la durée de vie d'un paquet pour éviter les boucles de routage infinies
+    ~Chiffrer le contenu du paquet
+    ~Identifier le protocole de couche transport (TCP ou UDP)
+    ~Indiquer la longueur totale du paquet
+    ####Le TTL est décrémenté de 1 à chaque passage dans un routeur. Quand il atteint 0, le routeur détruit le paquet et envoie un message ICMP "Time Exceeded" à l'émetteur. Cela empêche les paquets de circuler indéfiniment en cas de boucle.
+}
+
+::OSI-14::[html]Lequel de ces protocoles appartient à la couche Application (couche 7) du modèle OSI ? {
+    =SMTP (Simple Mail Transfer Protocol)
+    ~TCP (Transmission Control Protocol)
+    ~IP (Internet Protocol)
+    ~Ethernet
+    ####SMTP (port 25/587) est un protocole de couche Application utilisé pour l'envoi de courriels. TCP est couche 4, IP est couche 3, Ethernet est couche 2.
+}
+
+::OSI-15::[html]Lors de la réception d'une trame par une carte réseau, dans quel ordre la désencapsulation se produit-elle ? {
+    =Couche 1 → Couche 2 → Couche 3 → Couche 4 → Couche 7
+    ~Couche 7 → Couche 4 → Couche 3 → Couche 2 → Couche 1
+    ~La désencapsulation ne suit pas l'ordre des couches OSI
+    ~Couche 4 → Couche 3 → Couche 2 → Couche 1
+    ####À la réception, la désencapsulation remonte les couches de 1 à 7 : la couche 1 reçoit les bits, la couche 2 valide la trame et extrait le paquet, la couche 3 lit l'adresse IP et extrait le segment, la couche 4 reassemble les données pour l'application.
+}

@@ -1,0 +1,126 @@
+// ============================================================
+// Cours 1 — Module 4 : Protocoles de couche application
+// Quiz formatif — 15 questions
+// ============================================================
+
+$CATEGORY: $course$/Cours 1 — Module 4 — Protocoles applicatifs
+
+::PROTO-01::[html]Quel est le port TCP standard utilisé par le protocole SSH (Secure Shell) ? {
+    =22
+    ~21
+    ~23
+    ~443
+    ####SSH utilise le port TCP 22. Il est le remplaçant sécurisé de Telnet (port 23, non chiffré). FTP utilise les ports 20 (données) et 21 (contrôle).
+}
+
+::PROTO-02::[html]Quel protocole DNS utilise-t-on pour résoudre une adresse IP en nom de domaine (résolution inverse) ? {
+    =Enregistrement PTR (Pointer Record) dans la zone in-addr.arpa
+    ~Enregistrement A dans la zone directe
+    ~Enregistrement MX
+    ~Enregistrement CNAME
+    ####La résolution inverse (IP → nom) utilise des enregistrements PTR dans les zones spéciales in-addr.arpa (IPv4) ou ip6.arpa (IPv6). Par exemple, pour 192.168.1.10, la requête inverse cherche 10.1.168.192.in-addr.arpa.
+}
+
+::PROTO-03::[html]Quelle est la différence entre SMTP et IMAP dans le contexte des courriels ? {
+    =SMTP envoie les courriels (port 587/25) ; IMAP permet de les consulter sur le serveur (port 143/993)
+    ~SMTP et IMAP ont la même fonction mais utilisent des ports différents
+    ~IMAP envoie les courriels ; SMTP les reçoit
+    ~SMTP est plus sécurisé qu'IMAP
+    ####SMTP (Simple Mail Transfer Protocol, ports 25/587) est utilisé pour l'envoi de courriels entre serveurs et du client vers le serveur. IMAP (ports 143/993) permet de lire et gérer les courriels stockés sur le serveur sans les télécharger (contrairement à POP3).
+}
+
+::PROTO-04::[html]Quel est le rôle du protocole DHCP dans un réseau d'entreprise ? {
+    =Attribuer automatiquement une configuration réseau (IP, masque, passerelle, DNS) aux hôtes
+    ~Traduire les noms de domaine en adresses IP
+    ~Sécuriser les connexions web avec TLS
+    ~Transférer des fichiers entre serveurs
+    ####DHCP (Dynamic Host Configuration Protocol, port UDP 67 serveur / 68 client) automatise la configuration réseau. Sans DHCP, chaque appareil doit être configuré manuellement. DHCP utilise le processus DORA : Discover, Offer, Request, Acknowledge.
+}
+
+::PROTO-05::[html]Un utilisateur tape "https://moodle.monecole.ca" dans son navigateur. Dans quel ordre les protocoles interviennent-ils avant que la page ne s'affiche ? {
+    =DNS (résolution du nom) → TCP (connexion) → TLS (négociation sécurité) → HTTP (requête page)
+    ~HTTP → TCP → DNS → TLS
+    ~TLS → DNS → HTTP → TCP
+    ~TCP → HTTP → DNS → TLS
+    ####La séquence est : (1) DNS résout moodle.monecole.ca en adresse IP, (2) TCP établit la connexion sur le port 443, (3) TLS négocie le chiffrement (handshake), (4) HTTP envoie la requête GET pour la page. Sans DNS, pas d'IP. Sans TCP, pas de connexion. Sans TLS, pas de HTTPS.
+}
+
+::PROTO-06::[html]Quel enregistrement DNS est utilisé pour associer un nom de domaine à une adresse IPv4 ? {
+    =Enregistrement A (Address)
+    ~Enregistrement AAAA
+    ~Enregistrement MX
+    ~Enregistrement CNAME
+    ####L'enregistrement A (Address) associe un nom de domaine à une adresse IPv4 (ex. moodle.monecole.ca → 192.168.1.100). L'enregistrement AAAA fait la même chose pour IPv6. MX pointe vers le serveur de messagerie. CNAME est un alias vers un autre nom.
+}
+
+::PROTO-07::[html]Quel protocole est utilisé pour le transfert sécurisé de fichiers en chiffrant la connexion avec SSH ? {
+    =SFTP (SSH File Transfer Protocol) ou SCP (Secure Copy Protocol)
+    ~FTP (File Transfer Protocol)
+    ~TFTP (Trivial FTP)
+    ~HTTP
+    ####SFTP et SCP utilisent le tunnel SSH (port 22) pour transférer des fichiers de façon sécurisée. FTP (ports 20/21) transfère en clair. TFTP (port UDP 69) est un protocole minimal utilisé pour le démarrage PXE et les mises à jour de firmware réseau.
+}
+
+::PROTO-08::[html]Sur quel port UDP écoute un serveur DHCP pour recevoir les requêtes des clients ? {
+    =Port UDP 67
+    ~Port UDP 68
+    ~Port TCP 80
+    ~Port UDP 53
+    ####Le serveur DHCP écoute sur le port UDP 67. Les clients DHCP envoient leurs découvertes (DHCPDISCOVER) depuis le port UDP 68. La communication initiale se fait en broadcast (255.255.255.255) car le client n'a pas encore d'adresse IP.
+}
+
+::PROTO-09::[html]Qu'est-ce qu'un enregistrement MX (Mail Exchanger) dans le DNS ? {
+    =Un enregistrement qui indique le serveur de messagerie responsable de recevoir les courriels pour un domaine
+    ~Un enregistrement qui associe un nom à une adresse IPv4
+    ~Un enregistrement de sécurité contre le phishing
+    ~Un enregistrement qui définit les serveurs de noms autoritaires
+    ####Un enregistrement MX pointe vers le serveur SMTP qui accepte les courriels entrants pour un domaine. Il inclut une priorité (valeur inférieure = priorité plus haute). Exemple : MX 10 mail.monecole.ca.
+}
+
+::PROTO-10::[html]Quel protocole permet à un navigateur web de récupérer des pages HTML d'un serveur web, et sur quel port fonctionne-t-il en mode non chiffré ? {
+    =HTTP (HyperText Transfer Protocol) sur le port TCP 80
+    ~HTTPS sur le port TCP 443
+    ~FTP sur le port TCP 21
+    ~SMTP sur le port TCP 25
+    ####HTTP opère sur TCP port 80. HTTPS est HTTP sécurisé avec TLS sur TCP port 443. Le "S" de HTTPS signifie Secure — le contenu est chiffré et l'identité du serveur est vérifiée par un certificat.
+}
+
+::PROTO-11::[html]Lors d'une capture Wireshark, un technicien voit une requête vers le port destination 53 en UDP. Quel type de trafic observe-t-il ? {
+    =Une requête DNS (résolution de nom de domaine)
+    ~Une requête DHCP
+    ~Une requête NTP
+    ~Une requête SNMP
+    ####Le port 53 UDP est le port standard de DNS. Le port 67/68 UDP est DHCP. Le port 123 UDP est NTP. Le port 161 UDP est SNMP. Le technicien voit un client effectuer une résolution de nom.
+}
+
+::PROTO-12::[html]Quel protocole est utilisé pour synchroniser l'horloge des serveurs et équipements réseau avec une source de temps de référence ? {
+    =NTP (Network Time Protocol) — port UDP 123
+    ~DNS — port UDP 53
+    ~SNMP — port UDP 161
+    ~Syslog — port UDP 514
+    ####NTP (Network Time Protocol) synchronise les horloges des systèmes. La synchronisation précise est critique pour : la corrélation des logs, les certificats TLS, Kerberos, et les protocoles de routage. Les équipements opérateur se synchronisent via une hiérarchie de strates NTP.
+}
+
+::PROTO-13::[html]Quel est le rôle du protocole SNMP (Simple Network Management Protocol) dans un réseau d'entreprise ou opérateur ? {
+    =Surveiller et gérer les équipements réseau (routeurs, switches) en collectant des métriques et en envoyant des alertes (traps)
+    ~Chiffrer les communications entre équipements réseau
+    ~Résoudre les noms de domaine en adresses IP
+    ~Transférer des fichiers de configuration entre équipements
+    ####SNMP (ports UDP 161 pour requêtes, 162 pour traps) permet aux outils de monitoring (Zabbix, Nagios) de collecter des métriques (bande passante, CPU, erreurs d'interface) et de recevoir des alertes proactives des équipements.
+}
+
+::PROTO-14::[html]Quelle méthode HTTP est utilisée pour envoyer des données d'un formulaire web vers un serveur (ex. : soumission d'un quiz Moodle) ? {
+    =POST
+    ~GET
+    ~DELETE
+    ~PUT
+    ####La méthode POST envoie les données dans le corps de la requête HTTP, adaptée pour soumettre des formulaires (mots de passe, données sensibles). GET envoie les paramètres dans l'URL, visible dans les logs. DELETE supprime une ressource. PUT met à jour une ressource.
+}
+
+::PROTO-15::[html]Un administrateur réseau veut vérifier quelles connexions TCP actives existent sur son serveur Linux et les ports en écoute. Quelle commande utilise-t-il ? {
+    =ss -tuln (ou netstat -tuln sur les systèmes plus anciens)
+    ~ping
+    ~traceroute
+    ~nslookup
+    ####La commande ss (Socket Statistics) remplace netstat sur les systèmes Linux modernes. ss -tuln affiche les connexions TCP (-t) et UDP (-u) en écoute (-l) avec les numéros de port (-n, sans résolution de noms). Utile pour vérifier quels services écoutent sur quels ports.
+}

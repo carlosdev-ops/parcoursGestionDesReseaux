@@ -116,6 +116,7 @@ if [[ -n "$STEP" ]]; then
 else
     run_step "00"
     run_step "01"
+    run_step "02"
 fi
 
 log_header "============================================================"
