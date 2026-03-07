@@ -96,7 +96,7 @@ parcours_log("  Total supprimé : {$deleted_total} modules", $deleted_total > 0 
 parcours_log("\n--- Étape 2 : Refonte esthétique Section 0 ---");
 
 $section0_summary = <<<'HTML'
-<div class="mb-4 pb-3 border-bottom">
+<div class="border-start border-primary border-4 ps-3 mb-4">
   <h4 class="fw-semibold mb-1">Cours 1 — Fondements des réseaux et modèles OSI/TCP-IP</h4>
   <p class="text-muted mb-0">
     Point de départ du Parcours Gestion des Réseaux. Vous allez construire le cadre conceptuel
@@ -104,130 +104,133 @@ $section0_summary = <<<'HTML'
   </p>
 </div>
 
-<div class="row g-4 mb-4">
+<div class="row g-3 mb-4">
 
-  <div class="col-md-6">
-    <div class="card border-0 bg-light h-100">
+  <div class="col-lg-7">
+    <div class="card h-100 border-0 shadow-sm">
+      <div class="card-header bg-primary text-white fw-semibold py-2">
+        Objectifs du cours
+      </div>
       <div class="card-body">
-        <h6 class="text-primary fw-semibold text-uppercase mb-3" style="letter-spacing:.05em">Objectifs du cours</h6>
         <ul class="list-unstyled mb-0">
-          <li class="d-flex gap-2 mb-2"><span class="text-primary">&#8594;</span> Décrire les 7 couches OSI et les 4 couches TCP/IP</li>
-          <li class="d-flex gap-2 mb-2"><span class="text-primary">&#8594;</span> Identifier le rôle de chaque équipement réseau selon sa couche</li>
-          <li class="d-flex gap-2 mb-2"><span class="text-primary">&#8594;</span> Capturer et analyser du trafic réseau avec Wireshark</li>
-          <li class="d-flex gap-2"><span class="text-primary">&#8594;</span> Documenter une topologie réseau selon les standards NOC</li>
+          <li class="d-flex gap-2 mb-2"><span class="text-primary fw-bold">&#8250;</span> Décrire les 7 couches OSI et les 4 couches TCP/IP</li>
+          <li class="d-flex gap-2 mb-2"><span class="text-primary fw-bold">&#8250;</span> Identifier le rôle de chaque équipement réseau selon sa couche</li>
+          <li class="d-flex gap-2 mb-2"><span class="text-primary fw-bold">&#8250;</span> Capturer et analyser du trafic réseau avec Wireshark</li>
+          <li class="d-flex gap-2"><span class="text-primary fw-bold">&#8250;</span> Documenter une topologie réseau selon les standards NOC</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="col-md-3">
-    <div class="card border-0 bg-light h-100">
-      <div class="card-body">
-        <h6 class="text-primary fw-semibold text-uppercase mb-3" style="letter-spacing:.05em">Informations</h6>
-        <dl class="row mb-0" style="font-size:.9em">
-          <dt class="col-6 fw-normal text-muted">Durée</dt>
-          <dd class="col-6">8 semaines</dd>
-          <dt class="col-6 fw-normal text-muted">Charge</dt>
-          <dd class="col-6">~5 h/semaine</dd>
-          <dt class="col-6 fw-normal text-muted">Niveau</dt>
-          <dd class="col-6">Introductif</dd>
-          <dt class="col-6 fw-normal text-muted">Équivalent</dt>
-          <dd class="col-6 mb-0">DEC 420-1A3</dd>
-        </dl>
+  <div class="col-lg-5">
+    <div class="row g-3">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-primary text-white fw-semibold py-2">
+            Informations
+          </div>
+          <div class="card-body py-2">
+            <dl class="row mb-0" style="font-size:.9em">
+              <dt class="col-5 fw-normal text-muted">Durée</dt>       <dd class="col-7">8 semaines</dd>
+              <dt class="col-5 fw-normal text-muted">Charge</dt>      <dd class="col-7">~5 h/semaine</dd>
+              <dt class="col-5 fw-normal text-muted">Niveau</dt>      <dd class="col-7">Introductif</dd>
+              <dt class="col-5 fw-normal text-muted mb-0">Équivalent</dt><dd class="col-7 mb-0">DEC 420-1A3</dd>
+            </dl>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="col-md-3">
-    <div class="card border-0 bg-light h-100">
-      <div class="card-body">
-        <h6 class="text-primary fw-semibold text-uppercase mb-3" style="letter-spacing:.05em">Plan — 6 modules</h6>
-        <ol class="mb-0 ps-3" style="font-size:.9em">
-          <li class="mb-1">Modèle OSI</li>
-          <li class="mb-1">Modèle TCP/IP</li>
-          <li class="mb-1">Médias et équipements</li>
-          <li class="mb-1">Protocoles applicatifs</li>
-          <li class="mb-1">Outils de diagnostic</li>
-          <li>Documentation NOC</li>
-        </ol>
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-primary text-white fw-semibold py-2">
+            Plan — 6 modules
+          </div>
+          <div class="card-body py-2">
+            <ol class="mb-0 ps-3" style="font-size:.9em;column-count:2">
+              <li class="mb-1">Modèle OSI</li>
+              <li class="mb-1">Modèle TCP/IP</li>
+              <li class="mb-1">Médias et équipements</li>
+              <li class="mb-1">Protocoles applicatifs</li>
+              <li class="mb-1">Outils de diagnostic</li>
+              <li>Documentation NOC</li>
+            </ol>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
 </div>
 
-<div class="card border-0 bg-light mb-4">
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-primary text-white fw-semibold py-2">
+    Prérequis — Préparer votre environnement de travail
+  </div>
   <div class="card-body">
-
-    <h6 class="text-primary fw-semibold text-uppercase mb-3" style="letter-spacing:.05em">Prérequis — Préparer votre environnement de travail</h6>
-    <p class="text-muted mb-4" style="font-size:.9em">
+    <p class="text-muted mb-3" style="font-size:.9em">
       Ce cours utilise quatre outils logiciels. Suivez les étapes ci-dessous dans l'ordre.
-      <strong>Si vous n'avez pas les droits administrateur sur votre ordinateur</strong> (ordinateur de travail,
-      poste de l'entreprise ou de l'école), une alternative sans installation est indiquée pour chaque outil.
+      <strong>Si vous n'avez pas les droits administrateur</strong> (ordinateur de travail, poste de l'entreprise
+      ou de l'école), une alternative sans installation est indiquée pour chaque outil.
     </p>
-
     <div class="row g-3">
 
       <div class="col-md-6">
-        <p class="fw-semibold mb-1">Étape 1 &mdash; Wireshark (analyseur de paquets)</p>
+        <p class="fw-semibold mb-1">Étape 1 &mdash; Wireshark <span class="text-muted fw-normal">(analyseur de paquets)</span></p>
         <p class="text-muted mb-1" style="font-size:.875em">Utilisé pour capturer et observer le trafic réseau en temps réel.</p>
         <ul style="font-size:.875em" class="mb-0">
-          <li><strong>Avec droits admin :</strong> Télécharger et installer depuis
+          <li><strong>Avec droits admin :</strong> Installer depuis
             <a href="https://www.wireshark.org" target="_blank">wireshark.org</a> (gratuit, Windows/Mac/Linux).</li>
-          <li><strong>Sans droits admin :</strong> Télécharger la version
+          <li><strong>Sans droits admin :</strong> Télécharger
             <a href="https://www.wireshark.org/download.html" target="_blank">Wireshark Portable</a>
-            (aucune installation, exécutable directement depuis une clé USB ou un dossier local).</li>
-          <li><strong>Sur un poste de laboratoire :</strong> Wireshark est généralement déjà installé — vérifiez avec votre responsable.</li>
+            — aucune installation, exécutable depuis une clé USB ou un dossier local.</li>
+          <li><strong>Sur poste de laboratoire :</strong> Généralement déjà installé — vérifiez avec votre responsable.</li>
         </ul>
       </div>
 
       <div class="col-md-6">
-        <p class="fw-semibold mb-1">Étape 2 &mdash; Cisco Packet Tracer (simulateur réseau)</p>
-        <p class="text-muted mb-1" style="font-size:.875em">Utilisé pour construire et tester des topologies réseau sans équipement physique.</p>
+        <p class="fw-semibold mb-1">Étape 2 &mdash; Cisco Packet Tracer <span class="text-muted fw-normal">(simulateur réseau)</span></p>
+        <p class="text-muted mb-1" style="font-size:.875em">Pour construire et tester des topologies réseau sans équipement physique.</p>
         <ul style="font-size:.875em" class="mb-0">
-          <li><strong>Option recommandée (sans installation) :</strong> Utiliser la version navigateur via
+          <li><strong>Option recommandée (aucune installation) :</strong> Version navigateur via
             <a href="https://skillsforall.com" target="_blank">Cisco Skills for All</a>
-            — créer un compte gratuit, aucun logiciel à installer.</li>
-          <li><strong>Avec droits admin :</strong> Télécharger l'application de bureau depuis
+            — compte gratuit, aucun logiciel à installer.</li>
+          <li><strong>Avec droits admin :</strong> Application de bureau depuis
             <a href="https://www.netacad.com" target="_blank">netacad.com</a> après création d'un compte.</li>
         </ul>
       </div>
 
       <div class="col-md-6">
-        <p class="fw-semibold mb-1">Étape 3 &mdash; Terminal Linux</p>
-        <p class="text-muted mb-1" style="font-size:.875em">Utilisé pour les commandes de diagnostic (ping, traceroute, dig, ss...).</p>
+        <p class="fw-semibold mb-1">Étape 3 &mdash; Terminal Linux <span class="text-muted fw-normal">(commandes de diagnostic)</span></p>
+        <p class="text-muted mb-1" style="font-size:.875em">Pour les commandes ping, traceroute, dig, ss, etc.</p>
         <ul style="font-size:.875em" class="mb-0">
-          <li><strong>Sur Mac ou Linux :</strong> Le terminal est déjà disponible, aucune installation requise.</li>
-          <li><strong>Sur Windows avec droits admin :</strong> Activer WSL2 (Windows Subsystem for Linux) via les
-            fonctionnalités Windows, puis installer Ubuntu depuis le Microsoft Store.</li>
-          <li><strong>Sur Windows sans droits admin :</strong> Utiliser
-            <a href="https://webminal.org" target="_blank">webminal.org</a> (terminal Linux en ligne, gratuit)
-            ou vérifier si <strong>Git Bash</strong> est déjà installé sur votre poste.</li>
+          <li><strong>Mac ou Linux :</strong> Terminal déjà disponible, aucune installation requise.</li>
+          <li><strong>Windows avec droits admin :</strong> Activer WSL2, puis Ubuntu depuis le Microsoft Store.</li>
+          <li><strong>Windows sans droits admin :</strong>
+            <a href="https://webminal.org" target="_blank">webminal.org</a> (terminal Linux en ligne)
+            ou Git Bash si déjà installé sur votre poste.</li>
         </ul>
       </div>
 
       <div class="col-md-6">
-        <p class="fw-semibold mb-1">Étape 4 &mdash; draw.io (schémas de topologie)</p>
-        <p class="text-muted mb-1" style="font-size:.875em">Utilisé pour créer des schémas de topologie réseau selon les standards NOC.</p>
+        <p class="fw-semibold mb-1">Étape 4 &mdash; draw.io <span class="text-muted fw-normal">(schémas de topologie)</span></p>
+        <p class="text-muted mb-1" style="font-size:.875em">Pour créer des schémas réseau selon les standards NOC.</p>
         <ul style="font-size:.875em" class="mb-0">
-          <li><strong>Aucune installation requise :</strong> Utiliser directement
+          <li><strong>Aucune installation requise :</strong>
             <a href="https://app.diagrams.net" target="_blank">app.diagrams.net</a>
-            dans votre navigateur — les fichiers sont sauvegardés localement ou sur Google Drive.</li>
+            dans votre navigateur — fichiers sauvegardés localement ou sur Google Drive.</li>
         </ul>
-        <p class="fw-semibold mt-3 mb-1">Vous avez un doute sur votre configuration ?</p>
-        <p style="font-size:.875em" class="mb-0">Contactez votre responsable de formation avant de commencer
-          le Module 1. La plupart des exercices pratiques peuvent aussi être réalisés sur les postes
-          du laboratoire informatique si votre ordinateur personnel ne permet pas l'installation de logiciels.</p>
+        <p class="fw-semibold mt-3 mb-1">Un doute sur votre configuration ?</p>
+        <p style="font-size:.875em" class="mb-0">Contactez votre responsable de formation. La plupart des exercices
+          peuvent aussi être réalisés sur les postes du laboratoire informatique.</p>
       </div>
 
     </div>
   </div>
 </div>
 
-<p class="text-muted border-top pt-3 mb-0" style="font-size:.875em">
-  <strong>Avant de commencer le Module 1</strong>, complétez le test diagnostique ci-dessous.
-  Il évalue vos connaissances actuelles, n'affecte pas votre note et vous donne des résultats immédiats.
-</p>
+<div class="alert alert-primary border-0 mb-0" role="alert">
+  <strong>Avant de commencer le Module 1</strong> — complétez le test diagnostique ci-dessous.
+  Il évalue vos connaissances actuelles, n'affecte pas votre note et donne des résultats immédiats.
+</div>
 HTML;
 
 // Mettre à jour le résumé de la section 0
