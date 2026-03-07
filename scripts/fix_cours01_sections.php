@@ -260,6 +260,64 @@ if (!$dry_run) {
     parcours_log("  OK", 'success');
 }
 
+// Section 7 — Évaluation finale & Synthèse
+$section7_html = <<<'HTML'
+<div class="alert alert-primary d-flex align-items-start gap-3 mb-4" role="alert">
+  <div class="fs-2 me-1">&#x1F3C6;</div>
+  <div>
+    <h4 class="alert-heading mb-1">Évaluation finale &amp; Synthèse</h4>
+    <p class="mb-0">Cette section regroupe l'évaluation sommative du cours. Complétez tous les modules et leurs travaux pratiques avant d'y accéder.</p>
+  </div>
+</div>
+
+<div class="row g-3 mb-3">
+
+  <div class="col-md-6">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-header bg-primary text-white fw-semibold">
+        &#x2753; Quiz sommatif
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2">&#x1F4CA; 30 questions aléatoires couvrant les 6 modules</li>
+          <li class="mb-2">&#x23F1; 60 minutes · 1 seule tentative</li>
+          <li>&#x1F3AF; Note de passage : 70 %</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-header bg-warning text-dark fw-semibold">
+        &#x1F9EA; Projet intégrateur
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2">&#x1F5FA; Documenter et analyser une topologie réseau réelle</li>
+          <li class="mb-2">&#x1F4C4; Livrable : schéma + inventaire + plan d'adressage</li>
+          <li>&#x1F4CB; Standards NOC appliqués (draw.io, nomenclature, runbook)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="alert alert-info mb-0" role="alert">
+  <strong>&#x26A0; Condition d'accès</strong> — Assurez-vous d'avoir complété les quiz formatifs et les travaux pratiques des 6 modules avant de commencer cette évaluation.
+</div>
+HTML;
+
+$sec7 = $DB->get_record('course_sections', ['course' => $courseid, 'section' => 7]);
+parcours_log("Section 7 — Évaluation finale & Synthèse");
+if ($sec7 && !$dry_run) {
+    $sec7->summary       = $section7_html;
+    $sec7->summaryformat = FORMAT_HTML;
+    $DB->update_record('course_sections', $sec7);
+    parcours_log("  OK", 'success');
+}
+
 // Sections 1–6
 foreach ($modules as $snum => $data) {
     $html = module_html($snum, $data['title'], $data['objectif'], $data['outils'], $data['labo']);
