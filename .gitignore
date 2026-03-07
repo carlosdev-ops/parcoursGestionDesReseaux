@@ -1,0 +1,13 @@
+# État local du déploiement — ne pas versionner
+.deploy_state.json
+
+# Backups Moodle générés localement
+*.mbz
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires PHP
+*.swp
+*.swo
