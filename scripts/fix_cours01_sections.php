@@ -1,6 +1,6 @@
 <?php
 /**
- * fix_cours01_sections.php — Design professionnel uniforme pour toutes les sections du Cours 1
+ * fix_cours01_sections.php — Design original restauré + uniformisé sur toutes les sections
  *
  * Usage :
  *   sudo -u www-data php scripts/fix_cours01_sections.php --moodle=/var/www/moodle
@@ -25,55 +25,61 @@ require_once(__DIR__ . '/lib.php');
 $courseid = 2;
 $course   = get_course($courseid);
 
-parcours_log("=== Uniformisation design professionnel — Cours 1 ===");
+parcours_log("=== Restauration design original — Cours 1 ===");
 $dry_run && parcours_log("MODE DRY-RUN", 'warning');
 
 // ============================================================
-// Fonction utilitaire : génère le HTML d'une section module (1–6)
-// Palette sémantique : bleu = objectif / gris = outils / vert = activités
+// Fonction : HTML d'une section module (1–6)
+// Palette identique à la Section 0 originale :
+//   bg-primary   = objectif (apprentissage)
+//   bg-info      = outils (ressources)
+//   bg-warning   = activités (ce que l'étudiant fait)
 // ============================================================
 function module_html(int $num, string $title, string $objectif, string $outils, string $labo): string {
     $n = $num;
     return <<<HTML
-<div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom border-2">
-  <span class="badge bg-primary px-3 py-2" style="font-size:1rem;letter-spacing:.03em;white-space:nowrap">Module {$n}</span>
-  <h4 class="fw-semibold mb-0">{$title}</h4>
+<div class="alert alert-primary d-flex align-items-start gap-3 mb-4" role="alert">
+  <div class="fs-2 me-1">&#x1F4D6;</div>
+  <div>
+    <h4 class="alert-heading mb-1">Module {$n} — {$title}</h4>
+    <p class="mb-0">Suivez la lecture guidée, complétez le quiz formatif, puis réalisez le travail pratique avant de passer au module suivant.</p>
+  </div>
 </div>
 
-<div class="row g-3">
+<div class="row g-3 mb-3">
 
-  <div class="col-lg-8">
+  <div class="col-md-8">
     <div class="card h-100 border-0 shadow-sm">
-      <div class="card-header bg-primary text-white fw-semibold py-2 px-3">
-        Objectif d'apprentissage
+      <div class="card-header bg-primary text-white fw-semibold">
+        &#x1F3AF; Objectif d'apprentissage
       </div>
-      <div class="card-body px-4 py-3">
+      <div class="card-body">
         <p class="mb-0">{$objectif}</p>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-4">
+  <div class="col-md-4">
     <div class="d-flex flex-column gap-3 h-100">
 
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-secondary text-white fw-semibold py-2 px-3">
-          Outils utilisés
+        <div class="card-header bg-info text-white fw-semibold">
+          &#x1F6E0; Outils utilisés
         </div>
-        <div class="card-body px-4 py-3">
+        <div class="card-body">
           <p class="mb-0">{$outils}</p>
         </div>
       </div>
 
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-success text-white fw-semibold py-2 px-3">
-          Activités
+        <div class="card-header bg-warning text-dark fw-semibold">
+          &#x1F4CB; Activités
         </div>
-        <div class="card-body px-4 py-3">
-          <ul class="mb-0 ps-3">
-            <li class="mb-2">Livre — Lecture guidée</li>
-            <li class="mb-2">Quiz formatif — 15 questions</li>
-            <li>Travail pratique — {$labo}</li>
+        <div class="card-body">
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2">&#x1F4D5; Livre — Lecture guidée</li>
+            <li class="mb-2">&#x2753; Quiz formatif — 15 questions</li>
+            <li>&#x1F9EA; Travail pratique — {$labo}</li>
           </ul>
         </div>
       </div>
@@ -128,132 +134,114 @@ $modules = [
 ];
 
 // ============================================================
-// Section 0 — Bienvenue & Diagnostic (design unifié)
+// Section 0 — design original restauré + prérequis réalistes
 // ============================================================
 $section0_html = <<<'HTML'
-<div class="border-start border-primary border-4 ps-4 mb-4 pb-2">
-  <h4 class="fw-semibold mb-2">Cours 1 — Fondements des réseaux et modèles OSI/TCP-IP</h4>
-  <p class="text-secondary mb-0">
-    Point de départ du Parcours Gestion des Réseaux. Vous allez construire le cadre conceptuel
-    qui donne du sens à chaque équipement que vous branchez et chaque commande que vous exécutez.
-  </p>
-</div>
+<div class="course-welcome-section">
 
-<div class="row g-3 mb-4">
-
-  <div class="col-lg-7">
-    <div class="card h-100 border-0 shadow-sm">
-      <div class="card-header bg-primary text-white fw-semibold py-2 px-3">
-        Objectifs du cours
-      </div>
-      <div class="card-body px-4 py-3">
-        <ul class="list-unstyled mb-0">
-          <li class="d-flex gap-2 mb-3"><span class="text-primary fw-bold mt-1">&#8250;</span><span>Décrire les 7 couches OSI et les 4 couches TCP/IP et expliquer le rôle de chacune</span></li>
-          <li class="d-flex gap-2 mb-3"><span class="text-primary fw-bold mt-1">&#8250;</span><span>Identifier les équipements réseau selon leur couche d'opération</span></li>
-          <li class="d-flex gap-2 mb-3"><span class="text-primary fw-bold mt-1">&#8250;</span><span>Capturer et analyser du trafic réseau en temps réel avec Wireshark</span></li>
-          <li class="d-flex gap-2"><span class="text-primary fw-bold mt-1">&#8250;</span><span>Documenter une topologie réseau selon les standards NOC</span></li>
-        </ul>
-      </div>
+  <div class="alert alert-primary d-flex align-items-start gap-3 mb-4" role="alert">
+    <div class="fs-2 me-2">📡</div>
+    <div>
+      <h3 class="alert-heading mb-1">Bienvenue dans le Cours 1 — Fondements des réseaux</h3>
+      <p class="mb-0">Point de départ du Parcours Gestion des Réseaux. Vous allez construire le cadre conceptuel qui donne du sens à tout ce que vous branchez et configurez au quotidien.</p>
     </div>
   </div>
 
-  <div class="col-lg-5">
-    <div class="d-flex flex-column gap-3 h-100">
+  <div class="row g-3 mb-4">
 
-      <div class="card border-0 shadow-sm">
-        <div class="card-header bg-secondary text-white fw-semibold py-2 px-3">
+    <div class="col-md-7">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-header bg-primary text-white fw-semibold">
+          Objectifs d'apprentissage
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2">&#x2705; Décrire et distinguer les 7 couches OSI et les 4 couches TCP/IP</li>
+            <li class="mb-2">&#x2705; Identifier le rôle des équipements réseau à chaque couche</li>
+            <li class="mb-2">&#x2705; Capturer et analyser du trafic réseau avec <strong>Wireshark</strong></li>
+            <li class="mb-0">&#x2705; Documenter une topologie réseau selon les standards NOC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-header bg-secondary text-white fw-semibold">
           Informations
         </div>
-        <div class="card-body px-4 py-3">
-          <dl class="row mb-0">
-            <dt class="col-5 fw-normal text-secondary">Durée</dt>          <dd class="col-7">8 semaines</dd>
-            <dt class="col-5 fw-normal text-secondary">Charge</dt>         <dd class="col-7">~5 h / semaine</dd>
-            <dt class="col-5 fw-normal text-secondary">Niveau</dt>         <dd class="col-7">Introductif</dd>
-            <dt class="col-5 fw-normal text-secondary mb-0">Équivalent</dt><dd class="col-7 mb-0">DEC 420-1A3</dd>
-          </dl>
+        <div class="card-body p-0">
+          <table class="table table-sm table-borderless mb-0">
+            <tbody>
+              <tr><td class="ps-3 text-muted" style="width:40%">Durée</td><td><strong>8 semaines · ~40 h</strong></td></tr>
+              <tr class="table-light"><td class="ps-3 text-muted">Niveau</td><td><span class="badge bg-success">Introductif</span></td></tr>
+              <tr><td class="ps-3 text-muted">Équivalent DEC</td><td><strong>420-1A3</strong></td></tr>
+              <tr class="table-light"><td class="ps-3 text-muted">Cadence</td><td>~5 h / semaine</td></tr>
+              <tr><td class="ps-3 text-muted">Langue</td><td>Français</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
 
+  </div>
+
+  <div class="row g-3 mb-4">
+
+    <div class="col-md-6">
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-secondary text-white fw-semibold py-2 px-3">
-          Plan — 6 modules
+        <div class="card-header bg-info text-white fw-semibold">
+          Plan du cours — 6 modules
         </div>
-        <div class="card-body px-4 py-3">
-          <ol class="mb-0 ps-3">
-            <li class="mb-2">Modèle OSI — Les 7 couches</li>
-            <li class="mb-2">Modèle TCP/IP et encapsulation</li>
-            <li class="mb-2">Médias et équipements réseau</li>
-            <li class="mb-2">Protocoles de couche application</li>
-            <li class="mb-2">Outils de diagnostic fondamentaux</li>
-            <li>Documentation et nomenclature NOC</li>
-          </ol>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>1.</strong> Modèle OSI — les 7 couches</li>
+          <li class="list-group-item"><strong>2.</strong> Modèle TCP/IP &amp; encapsulation</li>
+          <li class="list-group-item"><strong>3.</strong> Médias et équipements réseau</li>
+          <li class="list-group-item"><strong>4.</strong> Protocoles de couche application</li>
+          <li class="list-group-item"><strong>5.</strong> Outils de diagnostic fondamentaux</li>
+          <li class="list-group-item"><strong>6.</strong> Documentation et nomenclature NOC</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-warning text-dark fw-semibold">
+          &#x26A0; Prérequis — Préparer votre environnement
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-3">Ce cours utilise 4 outils. Une alternative sans droits admin est indiquée pour chaque étape.</p>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2">
+              &#x1F50D; <strong>Wireshark</strong> —
+              <a href="https://www.wireshark.org" target="_blank">wireshark.org</a>
+              <small class="text-muted d-block ps-4">Sans droits admin : <a href="https://www.wireshark.org/download.html" target="_blank">Wireshark Portable</a> (clé USB)</small>
+            </li>
+            <li class="mb-2">
+              &#x1F4E6; <strong>Cisco Packet Tracer</strong> —
+              <a href="https://skillsforall.com" target="_blank">Cisco Skills for All</a> (navigateur, gratuit)
+              <small class="text-muted d-block ps-4">Avec droits admin : appli bureau via <a href="https://www.netacad.com" target="_blank">netacad.com</a></small>
+            </li>
+            <li class="mb-2">
+              &#x1F5A5; <strong>Terminal Linux</strong> — natif sur Mac/Linux
+              <small class="text-muted d-block ps-4">Windows sans droits admin : <a href="https://webminal.org" target="_blank">webminal.org</a> ou Git Bash</small>
+            </li>
+            <li>
+              &#x1F5FA; <strong>draw.io</strong> —
+              <a href="https://app.diagrams.net" target="_blank">app.diagrams.net</a> (navigateur, aucune installation)
+            </li>
+          </ul>
         </div>
       </div>
-
     </div>
+
   </div>
 
-</div>
-
-<div class="card border-0 shadow-sm mb-4">
-  <div class="card-header bg-success text-white fw-semibold py-2 px-3">
-    Prérequis — Préparer votre environnement de travail
+  <div class="alert alert-info mb-0" role="alert">
+    <strong>&#x1F4CB; Test diagnostique ci-dessous</strong> — Complétez-le avant de commencer le Module 1.
+    Il évalue vos connaissances actuelles et n'affecte pas votre note finale. Les résultats sont disponibles immédiatement.
   </div>
-  <div class="card-body px-4 py-3">
-    <p class="mb-4">
-      Ce cours utilise quatre outils logiciels. Suivez les étapes ci-dessous dans l'ordre.
-      <strong>Si vous n'avez pas les droits administrateur</strong> (ordinateur de travail ou de l'école),
-      une alternative sans installation est indiquée pour chaque outil.
-    </p>
 
-    <div class="row g-4">
-
-      <div class="col-md-6">
-        <p class="fw-semibold mb-1">Étape 1 &mdash; Wireshark <span class="text-secondary fw-normal">(analyseur de paquets)</span></p>
-        <p class="text-secondary mb-2">Utilisé pour capturer et observer le trafic réseau en temps réel.</p>
-        <ul class="mb-0">
-          <li class="mb-1"><strong>Avec droits admin :</strong> Installer depuis <a href="https://www.wireshark.org" target="_blank">wireshark.org</a> — gratuit, Windows / Mac / Linux.</li>
-          <li class="mb-1"><strong>Sans droits admin :</strong> Télécharger <a href="https://www.wireshark.org/download.html" target="_blank">Wireshark Portable</a> — aucune installation, fonctionne depuis une clé USB.</li>
-          <li><strong>Sur poste de laboratoire :</strong> Généralement préinstallé — vérifiez avec votre responsable.</li>
-        </ul>
-      </div>
-
-      <div class="col-md-6">
-        <p class="fw-semibold mb-1">Étape 2 &mdash; Cisco Packet Tracer <span class="text-secondary fw-normal">(simulateur réseau)</span></p>
-        <p class="text-secondary mb-2">Pour construire et tester des topologies réseau sans équipement physique.</p>
-        <ul class="mb-0">
-          <li class="mb-1"><strong>Recommandé — aucune installation :</strong> Version navigateur via <a href="https://skillsforall.com" target="_blank">Cisco Skills for All</a> — compte gratuit.</li>
-          <li><strong>Avec droits admin :</strong> Application de bureau depuis <a href="https://www.netacad.com" target="_blank">netacad.com</a> après création d'un compte.</li>
-        </ul>
-      </div>
-
-      <div class="col-md-6">
-        <p class="fw-semibold mb-1">Étape 3 &mdash; Terminal Linux <span class="text-secondary fw-normal">(commandes de diagnostic)</span></p>
-        <p class="text-secondary mb-2">Pour les commandes ping, traceroute, dig, ss, ip addr, etc.</p>
-        <ul class="mb-0">
-          <li class="mb-1"><strong>Mac ou Linux :</strong> Terminal intégré, aucune installation requise.</li>
-          <li class="mb-1"><strong>Windows avec droits admin :</strong> Activer WSL2, puis installer Ubuntu depuis le Microsoft Store.</li>
-          <li><strong>Windows sans droits admin :</strong> <a href="https://webminal.org" target="_blank">webminal.org</a> (terminal Linux en ligne) ou Git Bash si déjà installé.</li>
-        </ul>
-      </div>
-
-      <div class="col-md-6">
-        <p class="fw-semibold mb-1">Étape 4 &mdash; draw.io <span class="text-secondary fw-normal">(schémas de topologie)</span></p>
-        <p class="text-secondary mb-2">Pour créer des schémas de topologie réseau selon les standards NOC.</p>
-        <ul class="mb-0">
-          <li class="mb-1"><strong>Aucune installation requise :</strong> <a href="https://app.diagrams.net" target="_blank">app.diagrams.net</a> dans votre navigateur — fichiers sauvegardés localement ou sur Google Drive.</li>
-        </ul>
-        <p class="fw-semibold mt-3 mb-1">Un doute sur votre configuration ?</p>
-        <p class="mb-0">Contactez votre responsable de formation. La plupart des exercices peuvent aussi être réalisés sur les postes du laboratoire.</p>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="alert alert-primary border-0 mb-0" role="alert">
-  <strong>Avant de commencer le Module 1</strong> — complétez le test diagnostique ci-dessous.
-  Il évalue vos connaissances actuelles, n'affecte pas votre note et donne des résultats immédiats.
 </div>
 HTML;
 
@@ -262,29 +250,26 @@ HTML;
 // ============================================================
 
 // Section 0
-$section0 = $DB->get_record('course_sections', ['course' => $courseid, 'section' => 0]);
-parcours_log("Mise à jour Section 0 — Bienvenue & Diagnostic");
+$sec = $DB->get_record('course_sections', ['course' => $courseid, 'section' => 0]);
+parcours_log("Section 0 — Bienvenue & Diagnostic");
 if (!$dry_run) {
-    $section0->name          = 'Bienvenue & Diagnostic';
-    $section0->summary       = $section0_html;
-    $section0->summaryformat = FORMAT_HTML;
-    $DB->update_record('course_sections', $section0);
+    $sec->name          = 'Bienvenue & Diagnostic';
+    $sec->summary       = $section0_html;
+    $sec->summaryformat = FORMAT_HTML;
+    $DB->update_record('course_sections', $sec);
     parcours_log("  OK", 'success');
 }
 
 // Sections 1–6
 foreach ($modules as $snum => $data) {
     $html = module_html($snum, $data['title'], $data['objectif'], $data['outils'], $data['labo']);
-    $section = $DB->get_record('course_sections', ['course' => $courseid, 'section' => $snum]);
-    if (!$section) {
-        parcours_log("  Section {$snum} introuvable — ignorée", 'warning');
-        continue;
-    }
-    parcours_log("Mise à jour Section {$snum} — {$data['title']}");
+    $sec  = $DB->get_record('course_sections', ['course' => $courseid, 'section' => $snum]);
+    if (!$sec) { parcours_log("  Section {$snum} introuvable", 'warning'); continue; }
+    parcours_log("Section {$snum} — {$data['title']}");
     if (!$dry_run) {
-        $section->summary       = $html;
-        $section->summaryformat = FORMAT_HTML;
-        $DB->update_record('course_sections', $section);
+        $sec->summary       = $html;
+        $sec->summaryformat = FORMAT_HTML;
+        $DB->update_record('course_sections', $sec);
         parcours_log("  OK", 'success');
     }
 }
@@ -295,7 +280,7 @@ foreach ($modules as $snum => $data) {
 if (!$dry_run) {
     rebuild_course_cache($courseid, true);
     purge_all_caches();
-    parcours_log("\nCaches Moodle purgés.", 'info');
+    parcours_log("\nCaches purgés.", 'info');
 }
 
-parcours_log("\n=== Uniformisation terminée ===", 'success');
+parcours_log("\n=== Terminé ===", 'success');
