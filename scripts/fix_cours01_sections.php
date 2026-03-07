@@ -30,6 +30,7 @@ $dry_run && parcours_log("MODE DRY-RUN", 'warning');
 
 // ============================================================
 // Fonction utilitaire : génère le HTML d'une section module (1–6)
+// Palette sémantique : bleu = objectif / gris = outils / vert = activités
 // ============================================================
 function module_html(int $num, string $title, string $objectif, string $outils, string $labo): string {
     $n = $num;
@@ -56,7 +57,7 @@ function module_html(int $num, string $title, string $objectif, string $outils, 
     <div class="d-flex flex-column gap-3 h-100">
 
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-primary text-white fw-semibold py-2 px-3">
+        <div class="card-header bg-secondary text-white fw-semibold py-2 px-3">
           Outils utilisés
         </div>
         <div class="card-body px-4 py-3">
@@ -65,7 +66,7 @@ function module_html(int $num, string $title, string $objectif, string $outils, 
       </div>
 
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-primary text-white fw-semibold py-2 px-3">
+        <div class="card-header bg-success text-white fw-semibold py-2 px-3">
           Activités
         </div>
         <div class="card-body px-4 py-3">
@@ -160,21 +161,21 @@ $section0_html = <<<'HTML'
     <div class="d-flex flex-column gap-3 h-100">
 
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-primary text-white fw-semibold py-2 px-3">
+        <div class="card-header bg-secondary text-white fw-semibold py-2 px-3">
           Informations
         </div>
         <div class="card-body px-4 py-3">
           <dl class="row mb-0">
-            <dt class="col-5 fw-normal text-secondary">Durée</dt>        <dd class="col-7">8 semaines</dd>
-            <dt class="col-5 fw-normal text-secondary">Charge</dt>       <dd class="col-7">~5 h / semaine</dd>
-            <dt class="col-5 fw-normal text-secondary">Niveau</dt>       <dd class="col-7">Introductif</dd>
+            <dt class="col-5 fw-normal text-secondary">Durée</dt>          <dd class="col-7">8 semaines</dd>
+            <dt class="col-5 fw-normal text-secondary">Charge</dt>         <dd class="col-7">~5 h / semaine</dd>
+            <dt class="col-5 fw-normal text-secondary">Niveau</dt>         <dd class="col-7">Introductif</dd>
             <dt class="col-5 fw-normal text-secondary mb-0">Équivalent</dt><dd class="col-7 mb-0">DEC 420-1A3</dd>
           </dl>
         </div>
       </div>
 
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-primary text-white fw-semibold py-2 px-3">
+        <div class="card-header bg-secondary text-white fw-semibold py-2 px-3">
           Plan — 6 modules
         </div>
         <div class="card-body px-4 py-3">
@@ -195,7 +196,7 @@ $section0_html = <<<'HTML'
 </div>
 
 <div class="card border-0 shadow-sm mb-4">
-  <div class="card-header bg-primary text-white fw-semibold py-2 px-3">
+  <div class="card-header bg-success text-white fw-semibold py-2 px-3">
     Prérequis — Préparer votre environnement de travail
   </div>
   <div class="card-body px-4 py-3">
