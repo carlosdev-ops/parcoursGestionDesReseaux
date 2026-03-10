@@ -480,18 +480,9 @@ HTML;
 
 // ============================================================
 // Appliquer les résumés à chaque section
+// Note : Section 0 "Bienvenue & Diagnostic" n'est PAS modifiée —
+//        elle sert de référence visuelle pour les autres sections.
 // ============================================================
-
-// Section 0
-$sec = $DB->get_record('course_sections', ['course' => $courseid, 'section' => 0]);
-parcours_log("Section 0 — Bienvenue & Diagnostic");
-if (!$dry_run) {
-    $sec->name = 'Bienvenue & Diagnostic';
-    $sec->summary = $section0_html;
-    $sec->summaryformat = FORMAT_HTML;
-    $DB->update_record('course_sections', $sec);
-    parcours_log("  OK", 'success');
-}
 
 // Sections 1–6
 foreach ($modules as $snum => $data) {
